@@ -61,10 +61,11 @@ if (!file_exists($_SESSION["username"])) {
                         data-style="btn-outline-primary text-body-emphasis" data-icon-base="bi"
                         data-tick-icon="bi-check-lg" id="circleSelect">
                         <option data-divider="true"></option>
+                        <option data-subtext="<Blank>" selected></option>
                         <option data-subtext="Andhra Pradesh">AP</option>
                         <option data-subtext="Assam">AS</option>
                         <option data-subtext="Bihar">BR</option>
-                        <option data-subtext="Delhi Telecom Circle">DL</option>
+                        <option data-subtext="Delhi">DL</option>
                         <option data-subtext="Gujarat">GJ</option>
                         <option data-subtext="Haryana">HP</option>
                         <option data-subtext="Himachal Pradesh">HR</option>

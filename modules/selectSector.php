@@ -1,8 +1,5 @@
 <?php include_once ('dbConfig.php');
-$circle = @$_POST['circle'];
-// echo '<script type="text/javascript">
-//     alert("' . $circle . '");
-//     </script>'; ?>
+$circle = @$_POST['circle']; ?>
 
 <select class="dropdown selectpicker show-tick" data-width="fit" title="Select Sector" data-show-subtext="true"
     data-live-search="true" data-live-search-placeholder="🔎" data-size="10"
