@@ -20,6 +20,7 @@ if (!file_exists($_SESSION["username"])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css"> -->
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css"
@@ -34,6 +35,7 @@ if (!file_exists($_SESSION["username"])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/js/all.min.js"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"
         integrity="sha512-EC3CQ+2OkM+ZKsM1dbFAB6OGEPKRxi6EDRnZW9ys8LghQRAq6cXPUgXCCujmDrXdodGXX9bqaaCRtwj4h4wgSQ=="
@@ -67,14 +69,14 @@ if (!file_exists($_SESSION["username"])) {
                         <option data-subtext="Bihar">BR</option>
                         <option data-subtext="Delhi">DL</option>
                         <option data-subtext="Gujarat">GJ</option>
-                        <option data-subtext="Haryana">HP</option>
-                        <option data-subtext="Himachal Pradesh">HR</option>
+                        <option data-subtext="Himachal Pradesh">HP</option>
+                        <option data-subtext="Haryana">HR</option>
                         <option data-subtext="Jammu & Kashmir">JK</option>
                         <option data-subtext="Karnataka">KA</option>
                         <option data-subtext="Kerala">KL</option>
                         <option data-subtext="Kolkata">KO</option>
-                        <option data-subtext="Madhya Pradesh">MH</option>
-                        <option data-subtext="Maharashtra">MP</option>
+                        <option data-subtext="Maharashtra">MH</option>
+                        <option data-subtext="Madhya Pradesh">MP</option>
                         <option data-subtext="Mumbai">MU</option>
                         <option data-subtext="North-East">NE</option>
                         <option data-subtext="Odisha">OR</option>
@@ -145,8 +147,9 @@ if (!file_exists($_SESSION["username"])) {
                     <ul class="navbar-nav mb-1 mb-lg-0">
                         <li class="nav-item"></li>
                     </ul>
-                    <a class="btn btn-outline-danger" id="logout" title="Logout" href="Login/logout.php">
-                        <i class="bi bi-door-open-fill"></i></a>
+                    <a class="btn btn-outline-danger text-nowrap" id="logout" title="Logout" href="Login/logout.php">
+                        <!-- <i class="bi bi-door-open-fill"></i> -->
+                        Sign Out</a>
                 </div>
             </div>
         </nav>
