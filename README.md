@@ -18,8 +18,3 @@ $db = mysqli_connect('localhost', 'YOUR_ACCOUNT_USERNAME', 'YOUR_ACCOUNT_PASSWOR
 8. Create a folder `images` in `C:\xampp\htdocs\PicStore`.
 9. Start your Web Server & DB Server and navigate to `localhost/PicStore`.
 ## Pictures:
-
-## *Note:*
-*Passwords are stored as Plain Text as I haven't made a User Registration Page. After it is created I'll switch the Password checking Algo to verify hashes.*
-
-*Also feel free to modify the Project Files as per your requirements.*
