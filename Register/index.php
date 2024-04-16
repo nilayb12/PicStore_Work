@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button class="btn btn-primary w-50 me-1" type="submit" value="Register">Register</button>
                 <button class="btn btn-danger w-50" type="reset" value="Reset">Reset</button>
             </div>
-            <p>Already have an account? <a class="badge text-bg-info" href="../Login/">GoTo Login</a></p>
+            <p>Already have an account? <a class="badge text-bg-info" href="../Login/">Login Instead</a></p>
         </form>
     </main>
 </body>
