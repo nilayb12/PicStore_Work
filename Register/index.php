@@ -221,7 +221,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="d-flex my-3">
                 <button class="btn btn-primary w-50 me-1" type="submit" value="Register">Register</button>
-                <button class="btn btn-danger w-50" type="reset" value="Reset">Reset</button>
+                <a class="btn btn-danger w-50" value="Reset" href="./">Reset</a>
             </div>
             <p>Existing Users <a class="badge text-bg-info link-underline link-underline-opacity-0"
                     href="../Login/">Login Here</a></p>
