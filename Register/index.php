@@ -1,13 +1,42 @@
 <?php include_once ('../modules/dbConfig.php');
 
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$email = $username = $password = $confirm_password = "";
+$email_err = $username_err = $password_err = $confirm_password_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    if (empty(trim($_POST["email"]))) {
+        $email_err = "Please Enter your Email Address.";
+    } elseif (!preg_match('/^[a-zA-Z0-9]+\.[a-zA-Z]+@[a-zA-Z]+\.[a-z]+$/', trim($_POST["email"]))) {
+        $email_err = "Incorrect Email Address Format.";
+    } else {
+        $sql = "SELECT ID FROM users WHERE Email = ?";
+
+        if ($stmt = mysqli_prepare($db, $sql)) {
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
+
+            $param_email = trim($_POST["email"]);
+
+            if (mysqli_stmt_execute($stmt)) {
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+
+                if (mysqli_stmt_num_rows($stmt) == 1) {
+                    $email_err = "This Email already Exists.";
+                } else {
+                    $email = trim($_POST["email"]);
+                }
+            } else {
+                echo "Oops! Something went Wrong. Please Try Again later.";
+            }
+
+            mysqli_stmt_close($stmt);
+        }
+    }
+
     if (empty(trim($_POST["username"]))) {
         $username_err = "Please Enter a Username.";
-    } elseif (!preg_match('/^[a-zA-Z0-9._]+$/', trim($_POST["username"]))) {
+    } elseif (!preg_match('/^[a-zA-Z0-9]+\.[a-zA-Z]+$/', trim($_POST["username"]))) {
         $username_err = "Username can only contain Letters (A-Z, a-z), Numbers (0-9), and Dot (.)";
     } else {
         $sql = "SELECT ID FROM users WHERE UserName = ?";
@@ -51,13 +80,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
+    if (empty($email_err) && empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
 
-        $sql = "INSERT INTO users (UserName, Password) VALUES (?, ?)";
+        $sql = "INSERT INTO users (UserName, Email, Password) VALUES (?, ?, ?)";
 
         if ($stmt = mysqli_prepare($db, $sql)) {
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_email, $param_password);
 
+            $param_email = $email;
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -112,7 +142,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="input-group mb-1">
                 <div class="form-floating me-1">
                     <input type="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>"
-                        name="email" id="floatingEmail" placeholder="firstname.lastname@ril.com">
+                        name="email" id="floatingEmail" value="<?php echo $email; ?>"
+                        placeholder="firstname.lastname@ril.com">
                     <label for="floatingEmail">Email Address</label>
                     <span class="invalid-feedback">
                         <?php echo $email_err; ?>
