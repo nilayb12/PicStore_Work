@@ -1,7 +1,7 @@
 <?php include_once ('../modules/dbConfig.php');
 
 $email = $username = $password = $confirm_password = $phone_no = $circle = "";
-$email_err = $username_err = $password_err = $confirm_password_err = $phone_no_err = "";
+$email_err = $username_err = $password_err = $confirm_password_err = $phone_no_err = $circle_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty(trim($_POST["email"]))) {
         $email_err = "Please Enter your Email Address.";
     } elseif (!preg_match('/^[a-zA-Z0-9]+\.[a-zA-Z]+@[a-zA-Z]+\.[a-z]+$/', trim($_POST["email"]))) {
-        $email_err = "Email Address Format: [Username]@ril.com";
+        $email_err = "Email Address Format: [User ID]@ril.com";
     } else {
         $sql = "SELECT ID FROM users WHERE Email = ?";
 
