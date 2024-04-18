@@ -1,14 +1,15 @@
 <?php include_once ('../modules/dbConfig.php');
 
-$email = $username = $password = $confirm_password = "";
-$email_err = $username_err = $password_err = $confirm_password_err = "";
+$email = $username = $password = $confirm_password = $phone_no = $circle = "";
+$email_err = $username_err = $password_err = $confirm_password_err = $phone_no_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    // --------------Email Validation
     if (empty(trim($_POST["email"]))) {
         $email_err = "Please Enter your Email Address.";
     } elseif (!preg_match('/^[a-zA-Z0-9]+\.[a-zA-Z]+@[a-zA-Z]+\.[a-z]+$/', trim($_POST["email"]))) {
-        $email_err = "Incorrect Email Address Format.";
+        $email_err = "Email Address Format: [Username]@ril.com";
     } else {
         $sql = "SELECT ID FROM users WHERE Email = ?";
 
@@ -34,10 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+    // --------------Username Validation
     if (empty(trim($_POST["username"]))) {
         $username_err = "Please Enter a Username.";
     } elseif (!preg_match('/^[a-zA-Z0-9]+\.[a-zA-Z]+$/', trim($_POST["username"]))) {
-        $username_err = "Username can only contain Letters (A-Z, a-z), Numbers (0-9), and Dot (.)";
+        $username_err = "Username Format: [FirstName].[LastName][Number]";
     } else {
         $sql = "SELECT ID FROM users WHERE UserName = ?";
 
@@ -63,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+    // --------------Password Validation
     if (empty(trim($_POST["password"]))) {
         $password_err = "Please Enter a Password.";
     } elseif (strlen(trim($_POST["password"])) < 8) {
@@ -71,6 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = trim($_POST["password"]);
     }
 
+    // --------------Confirm Password
     if (empty(trim($_POST["confirm_password"]))) {
         $confirm_password_err = "Please Confirm Password.";
     } else {
@@ -80,16 +84,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    if (empty($email_err) && empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
+    // --------------Phone Number Validation
+    if (empty(trim($_POST["phone_no"]))) {
+        $phone_no_err = "Please Enter your Phone Number.";
+    } elseif (strlen(trim($_POST["phone_no"])) < 10) {
+        $phone_no_err = "Phone Number must have 10 Digits.";
+    } else {
+        $phone_no = trim($_POST["phone_no"]);
+    }
 
-        $sql = "INSERT INTO users (UserName, Email, Password) VALUES (?, ?, ?)";
+    // --------------Circle Validation
+    if (empty(trim($_POST["circle"]))) {
+        $circle_err = "Please Select your Circle.";
+    } else {
+        $circle = trim($_POST["circle"]);
+    }
+
+    // --------------Insert Values to DB
+    if (
+        empty($email_err) && empty($username_err) && empty($password_err) && empty($confirm_password_err)
+        && empty($phone_no_err) && empty($circle_err)
+    ) {
+
+        $sql = "INSERT INTO users (UserName, Email, Password, PhoneNo, CircleCode) VALUES (?, ?, ?, ?, ?)";
 
         if ($stmt = mysqli_prepare($db, $sql)) {
-            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_email, $param_password);
+            mysqli_stmt_bind_param($stmt, "sssis", $param_username, $param_email, $param_password, $param_phone_no, $param_circle);
 
             $param_email = $email;
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT);
+            $param_phone_no = $phone_no;
+            $param_circle = $circle;
 
             if (mysqli_stmt_execute($stmt)) {
                 header("location: ../Login/");
@@ -180,44 +206,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </span>
                 </div>
             </div>
-            <div class="input-group mb-1">
-                <span class="input-group-text">+91</span>
-                <!-- <div class="form-floating me-1"> -->
-                <input type="tel" class="form-control <?php echo (!empty($phoneno_err)) ? 'is-invalid' : ''; ?> me-1"
-                    name="phoneno" id="floatingPhoneno" placeholder="Phone Number" maxlength="10">
-                <!-- <label for="floatingPhoneno">Phone Number</label>
+            <div class="d-flex">
+                <div class="input-group me-1">
+                    <span class="input-group-text">+91</span>
+                    <!-- <div class="form-floating me-1"> -->
+                    <input type="tel" class="form-control <?php echo (!empty($phone_no_err)) ? 'is-invalid' : ''; ?>"
+                        name="phone_no" id="floatingPhoneNo" value="<?php echo $phone_no; ?>" placeholder="Phone Number"
+                        maxlength="10">
+                    <!-- <label for="floatingPhoneno">Phone Number</label>
                 </div> -->
-                <span class="invalid-feedback">
-                    <?php echo $phoneno_err; ?>
-                </span>
-                <select class="dropdown selectpicker show-tick" data-width="fit" title="Circle" data-show-subtext="true"
-                    data-live-search="true" data-live-search-placeholder="🔎" data-size="5"
-                    data-style="btn-outline-secondary text-body-emphasis" data-icon-base="bi"
-                    data-tick-icon="bi-check-lg" id="circleSelect">
-                    <option data-divider="true"></option>
-                    <option data-subtext="Andhra Pradesh">AP</option>
-                    <option data-subtext="Assam">AS</option>
-                    <option data-subtext="Bihar">BR</option>
-                    <option data-subtext="Delhi">DL</option>
-                    <option data-subtext="Gujarat">GJ</option>
-                    <option data-subtext="Himachal Pradesh">HP</option>
-                    <option data-subtext="Haryana">HR</option>
-                    <option data-subtext="Jammu & Kashmir">JK</option>
-                    <option data-subtext="Karnataka">KA</option>
-                    <option data-subtext="Kerala">KL</option>
-                    <option data-subtext="Kolkata">KO</option>
-                    <option data-subtext="Maharashtra">MH</option>
-                    <option data-subtext="Madhya Pradesh">MP</option>
-                    <option data-subtext="Mumbai">MU</option>
-                    <option data-subtext="North-East">NE</option>
-                    <option data-subtext="Odisha">OR</option>
-                    <option data-subtext="Punjab">PB</option>
-                    <option data-subtext="Rajasthan">RJ</option>
-                    <option data-subtext="Tamil Nadu">TN</option>
-                    <option data-subtext="Uttar Pradesh (East)">UE</option>
-                    <option data-subtext="Uttar Pradesh (West)">UW</option>
-                    <option data-subtext="West Bengal">WB</option>
-                </select>
+                    <span class="invalid-feedback">
+                        <?php echo $phone_no_err; ?>
+                    </span>
+                </div>
+                <div>
+                    <select
+                        class="dropdown selectpicker show-tick <?php echo (!empty($circle_err)) ? 'is-invalid' : ''; ?>"
+                        name="circle" value="<?php echo $circle; ?>" data-width="fit" title="Select Circle"
+                        data-show-subtext="true" data-live-search="true" data-live-search-placeholder="🔎" data-size="5"
+                        data-style="btn-outline-secondary text-body-emphasis form-control <?php echo (!empty($circle_err)) ? 'is-invalid' : ''; ?>"
+                        data-icon-base="bi" data-tick-icon="bi-check-lg" id="floatingCircle">
+                        <option data-divider="true" disabled></option>
+                        <option data-subtext="<Blank>" selected></option>
+                        <option data-subtext="Andhra Pradesh">AP</option>
+                        <option data-subtext="Assam">AS</option>
+                        <option data-subtext="Bihar">BR</option>
+                        <option data-subtext="Delhi">DL</option>
+                        <option data-subtext="Gujarat">GJ</option>
+                        <option data-subtext="Himachal Pradesh">HP</option>
+                        <option data-subtext="Haryana">HR</option>
+                        <option data-subtext="Jammu & Kashmir">JK</option>
+                        <option data-subtext="Karnataka">KA</option>
+                        <option data-subtext="Kerala">KL</option>
+                        <option data-subtext="Kolkata">KO</option>
+                        <option data-subtext="Maharashtra">MH</option>
+                        <option data-subtext="Madhya Pradesh">MP</option>
+                        <option data-subtext="Mumbai">MU</option>
+                        <option data-subtext="North-East">NE</option>
+                        <option data-subtext="Odisha">OR</option>
+                        <option data-subtext="Punjab">PB</option>
+                        <option data-subtext="Rajasthan">RJ</option>
+                        <option data-subtext="Tamil Nadu">TN</option>
+                        <option data-subtext="Uttar Pradesh (East)">UE</option>
+                        <option data-subtext="Uttar Pradesh (West)">UW</option>
+                        <option data-subtext="West Bengal">WB</option>
+                    </select>
+                    <span class="invalid-feedback">
+                        <?php echo $circle_err; ?>
+                    </span>
+                </div>
             </div>
             <div class="d-flex my-3">
                 <button class="btn btn-primary w-50 me-1" type="submit" value="Register">Register</button>

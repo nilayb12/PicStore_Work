@@ -5,7 +5,7 @@ $circle = @$_POST['circle']; ?>
     data-live-search="true" data-live-search-placeholder="🔎" data-size="10"
     data-style="btn-outline-primary text-body-emphasis" data-icon-base="bi" data-tick-icon="bi-check-lg"
     id="sectorSelect">
-    <option data-divider="true"></option>
+    <option data-divider="true" disabled></option>
     <?php
     $query = "SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS ExtractString, CircleCode FROM 5g_data WHERE CircleCode = ('$circle')";
     $result = mysqli_query($db, $query);

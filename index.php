@@ -62,7 +62,7 @@ if (!file_exists($_SESSION["username"])) {
                         data-show-subtext="true" data-live-search="true" data-live-search-placeholder="🔎" data-size="5"
                         data-style="btn-outline-primary text-body-emphasis" data-icon-base="bi"
                         data-tick-icon="bi-check-lg" id="circleSelect">
-                        <option data-divider="true"></option>
+                        <option data-divider="true" disabled></option>
                         <option data-subtext="<Blank>" selected></option>
                         <option data-subtext="Andhra Pradesh">AP</option>
                         <option data-subtext="Assam">AS</option>
