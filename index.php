@@ -6,8 +6,26 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     exit;
 }
 
-if (!file_exists($_SESSION["username"])) {
-    @mkdir('images/' . $_SESSION["username"], 0777, true);
+$query = "SELECT DISTINCT CircleCode FROM 5g_data";
+$result = mysqli_query($db, $query);
+
+while ($data = mysqli_fetch_assoc($result)) {
+    if (!file_exists($data["CircleCode"])) {
+        @mkdir('images/' . $data["CircleCode"], 0777, true);
+
+        $circle = $data["CircleCode"];
+        $query2 = "SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS Sector FROM `5g_data` WHERE CircleCode = ('$circle')";
+        $result2 = mysqli_query($db, $query2);
+
+        while ($data2 = mysqli_fetch_assoc($result2)) {
+            if (!file_exists($data2["Sector"])) {
+                @mkdir('images/' . $circle . '/' . $data2["Sector"], 0777, true);
+
+                $sector = $data2["Sector"];
+                $query3 = "SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS Sector FROM `5g_data` WHERE CircleCode = ('$circle')";
+            }
+        }
+    }
 }
 ?>
 
@@ -23,9 +41,10 @@ if (!file_exists($_SESSION["username"])) {
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css"> -->
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css"
+    <!link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css"
         integrity="sha512-za6IYQz7tR0pzniM/EAkgjV1gf1kWMlVJHBHavKIvsNoUMKWU99ZHzvL6lIobjiE2yKDAKMDSSmcMAxoiWgoWA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="JS/viewer.min.js" />
     <title>Image DB</title>
 </head>
 

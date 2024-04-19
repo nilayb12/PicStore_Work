@@ -7,11 +7,11 @@ $circle = @$_POST['circle']; ?>
     id="sectorSelect">
     <option data-divider="true" disabled></option>
     <?php
-    $query = "SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS ExtractString, CircleCode FROM 5g_data WHERE CircleCode = ('$circle')";
+    $query = "SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS ExtractString FROM 5g_data WHERE CircleCode = ('$circle') ORDER BY ExtractString ASC";
     $result = mysqli_query($db, $query);
 
     while ($data = mysqli_fetch_assoc($result)) {
-        echo '<option data-subtext="' . $data['CircleCode'] . '">' . $data['ExtractString'] . '</option>';
+        echo '<option data-subtext="' . $circle . '">' . $data['ExtractString'] . '</option>';
     }
     ?>
 </select>
