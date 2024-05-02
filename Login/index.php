@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($username_err) && empty($password_err)) {
-        $sql = "SELECT ID, UserName, Password FROM users WHERE UserName = ?";
+        $sql = "SELECT ID, UserName, Password, CircleCode, IsAdmin FROM users WHERE UserName = ?";
 
         if ($stmt = mysqli_prepare($db, $sql)) {
             mysqli_stmt_bind_param($stmt, "s", $param_username);
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 mysqli_stmt_store_result($stmt);
 
                 if (mysqli_stmt_num_rows($stmt) == 1) {
-                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $circle, $isAdmin);
 
                     if (mysqli_stmt_fetch($stmt)) {
 
@@ -41,8 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             // if (strcmp($password, $hashed_password) == 0) {
                             session_start();
                             $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username;
+                            $_SESSION["circle"] = $circle;
+                            $_SESSION["isAdmin"] = $isAdmin;
                             header("location: ../");
                         } else {
                             $login_err = "Invalid Password.";
@@ -115,18 +116,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <?php echo $password_err; ?>
                 </span>
             </div>
-            <div class="form-check text-start my-3">
+            <!-- <div class="form-check text-start my-3">
                 <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
                     Remember me
                 </label>
-            </div>
+            </div> -->
             <div class="d-flex my-3">
                 <button class="btn btn-primary w-50 me-1" type="submit" value="Login">Sign In</button>
-                <button class="btn btn-danger w-50" type="reset" value="Reset">Reset</button>
+                <!-- <button class="btn btn-danger w-50" type="reset" value="Reset">Reset</button> -->
             </div>
-            <p>New Users <a class="badge text-bg-info link-underline link-underline-opacity-0"
-                    href="../Register/">Register Here</a></p>
+            <!-- <p>New Users <a class="badge text-bg-info link-underline link-underline-opacity-0"
+                    href="../Register/">Register Here</a></p> -->
             <p class="mt-5 mb-3 text-body-secondary"><i class="bi bi-c-circle"></i> 19xx–2024</p>
         </form>
     </main>

@@ -6,11 +6,11 @@ if (isset($_POST['uploadBtn'])) {
 
         $fileName = $_FILES['uploadFile']['name'][$i];
         $tmpName = $_FILES['uploadFile']['tmp_name'][$i];
-        $userName = $_SESSION["username"];
-        $filePath = 'images/' . $userName . '/' . $fileName;
+        $folderPath = 'images/' . $_POST['pathVal'];
+        $filePath = $folderPath . '/' . $fileName;
 
         if (!empty($fileName)) {
-            $sql = "INSERT INTO image (UserName, FileName) VALUES (('$userName'),('$fileName'))";
+            $sql = "INSERT INTO image (FilePath, FileName) VALUES (('$folderPath'),('$fileName'))";
             if (file_exists($filePath)) {
                 echo "<script type='text/javascript'>
                     $(document).ready(function(){

@@ -229,28 +229,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         data-icon-base="bi" data-tick-icon="bi-check-lg" id="floatingCircle">
                         <option data-divider="true" disabled></option>
                         <option data-subtext="<Blank>" selected></option>
-                        <option data-subtext="Andhra Pradesh">AP</option>
-                        <option data-subtext="Assam">AS</option>
-                        <option data-subtext="Bihar">BR</option>
-                        <option data-subtext="Delhi">DL</option>
-                        <option data-subtext="Gujarat">GJ</option>
-                        <option data-subtext="Himachal Pradesh">HP</option>
-                        <option data-subtext="Haryana">HR</option>
-                        <option data-subtext="Jammu & Kashmir">JK</option>
-                        <option data-subtext="Karnataka">KA</option>
-                        <option data-subtext="Kerala">KL</option>
-                        <option data-subtext="Kolkata">KO</option>
-                        <option data-subtext="Maharashtra">MH</option>
-                        <option data-subtext="Madhya Pradesh">MP</option>
-                        <option data-subtext="Mumbai">MU</option>
-                        <option data-subtext="North-East">NE</option>
-                        <option data-subtext="Odisha">OR</option>
-                        <option data-subtext="Punjab">PB</option>
-                        <option data-subtext="Rajasthan">RJ</option>
-                        <option data-subtext="Tamil Nadu">TN</option>
-                        <option data-subtext="Uttar Pradesh (East)">UE</option>
-                        <option data-subtext="Uttar Pradesh (West)">UW</option>
-                        <option data-subtext="West Bengal">WB</option>
+                        <?php
+                        $query = "SELECT * FROM circle";
+                        $result = mysqli_query($db, $query);
+
+                        while ($data = mysqli_fetch_assoc($result)) {
+                            echo '<option data-subtext="' . $data['CircleName'] . '">' . $data['CircleCode'] . '</option>';
+                        }
+                        ?>
                     </select>
                     <span class="invalid-feedback">
                         <?php echo $circle_err; ?>

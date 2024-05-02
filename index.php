@@ -5,28 +5,36 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: Login/");
     exit;
 }
+$isAdmin = $_SESSION['isAdmin'] == 0 ? 'style="display: none !important;"' : '';
 
-$query = "SELECT DISTINCT CircleCode FROM 5g_data";
-$result = mysqli_query($db, $query);
+// $query = "SELECT * FROM circle";
+// $result = mysqli_query($db, $query);
 
-while ($data = mysqli_fetch_assoc($result)) {
-    if (!file_exists($data["CircleCode"])) {
-        @mkdir('images/' . $data["CircleCode"], 0777, true);
+// while ($data = mysqli_fetch_assoc($result)) {
+//     if (!file_exists($data['CircleCode'])) {
+//         @mkdir('images/' . $data['CircleCode'], 0777, true);
 
-        $circle = $data["CircleCode"];
-        $query2 = "SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS Sector FROM `5g_data` WHERE CircleCode = ('$circle')";
-        $result2 = mysqli_query($db, $query2);
+//         $circle = $data["CircleCode"];
+//         $query2 = "SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS City FROM 5g_data_30k WHERE CircleCode = ('$circle')";
+//         $result2 = mysqli_query($db, $query2);
 
-        while ($data2 = mysqli_fetch_assoc($result2)) {
-            if (!file_exists($data2["Sector"])) {
-                @mkdir('images/' . $circle . '/' . $data2["Sector"], 0777, true);
+//         while ($data2 = mysqli_fetch_assoc($result2)) {
+//             if (!file_exists($data2['City'])) {
+//                 @mkdir('images/' . $circle . '/' . $data2['City'], 0777, true);
 
-                $sector = $data2["Sector"];
-                $query3 = "SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS Sector FROM `5g_data` WHERE CircleCode = ('$circle')";
-            }
-        }
-    }
-}
+//                 $city = $data2["city"];
+//                 $query3 = "WITH temp AS (SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS City, SAP_ID FROM 5g_data_30k) SELECT DISTINCT SAP_ID FROM temp WHERE City = ('$city')";
+//                 $result3 = mysqli_query($db, $query3);
+
+//                 while ($data3 = mysqli_fetch_assoc($result3)) {
+//                     if (!file_exists($data3['SAP_ID'])) {
+//                         @mkdir('images/' . $circle . '/' . $city . '/' . $data3['SAP_ID'], 0777, true);
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
 ?>
 
 <!DOCTYPE html>
@@ -41,10 +49,9 @@ while ($data = mysqli_fetch_assoc($result)) {
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css"> -->
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
-    <!link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css"
         integrity="sha512-za6IYQz7tR0pzniM/EAkgjV1gf1kWMlVJHBHavKIvsNoUMKWU99ZHzvL6lIobjiE2yKDAKMDSSmcMAxoiWgoWA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="JS/viewer.min.js" />
     <title>Image DB</title>
 </head>
 
@@ -80,36 +87,24 @@ while ($data = mysqli_fetch_assoc($result)) {
                     <select class="dropdown selectpicker show-tick me-1" data-width="fit" title="Select Circle"
                         data-show-subtext="true" data-live-search="true" data-live-search-placeholder="🔎" data-size="5"
                         data-style="btn-outline-primary text-body-emphasis" data-icon-base="bi"
-                        data-tick-icon="bi-check-lg" id="circleSelect">
-                        <option data-divider="true" disabled></option>
-                        <option data-subtext="<Blank>" selected></option>
-                        <option data-subtext="Andhra Pradesh">AP</option>
-                        <option data-subtext="Assam">AS</option>
-                        <option data-subtext="Bihar">BR</option>
-                        <option data-subtext="Delhi">DL</option>
-                        <option data-subtext="Gujarat">GJ</option>
-                        <option data-subtext="Himachal Pradesh">HP</option>
-                        <option data-subtext="Haryana">HR</option>
-                        <option data-subtext="Jammu & Kashmir">JK</option>
-                        <option data-subtext="Karnataka">KA</option>
-                        <option data-subtext="Kerala">KL</option>
-                        <option data-subtext="Kolkata">KO</option>
-                        <option data-subtext="Maharashtra">MH</option>
-                        <option data-subtext="Madhya Pradesh">MP</option>
-                        <option data-subtext="Mumbai">MU</option>
-                        <option data-subtext="North-East">NE</option>
-                        <option data-subtext="Odisha">OR</option>
-                        <option data-subtext="Punjab">PB</option>
-                        <option data-subtext="Rajasthan">RJ</option>
-                        <option data-subtext="Tamil Nadu">TN</option>
-                        <option data-subtext="Uttar Pradesh (East)">UE</option>
-                        <option data-subtext="Uttar Pradesh (West)">UW</option>
-                        <option data-subtext="West Bengal">WB</option>
+                        data-tick-icon="bi-check-lg" data-hide-disabled="true" id="circleSelect">
+                        <option data-divider="true"></option>
+                        <option data-subtext="<Select Circle>" selected></option>
+                        <?php
+                        $query = "SELECT * FROM circle";
+                        $result = mysqli_query($db, $query);
+
+                        while ($data = mysqli_fetch_assoc($result)) {
+                            $sel = $data['CircleCode'] == $_SESSION['circle'] ? '' : 'disabled';
+                            echo '<option data-subtext="' . $data['CircleName'] . '"' . $sel . '>' . $data['CircleCode'] . '</option>';
+                        }
+                        ?>
                     </select>
-                    <ul class="navbar-nav mb-1 mb-lg-0">
+                    <!-- <ul class="navbar-nav mb-1 mb-lg-0">
                         <li class="nav-item"></li>
-                    </ul>
-                    <?php include ('modules/selectSector.php'); ?>
+                    </ul> -->
+                    <?php include ('modules/selectCity.php');
+                    include ('modules/selectSector.php') ?>
                 </div>
             </div>
         </nav>
@@ -117,7 +112,8 @@ while ($data = mysqli_fetch_assoc($result)) {
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <form class="input-group me-1" id="uploadForm" method="post" action="" enctype="multipart/form-data"
-                        style="width: auto;">
+                        style="width: auto;" disabled>
+                        <input type="hidden" name="pathVal" id="pathVal" />
                         <input class="form-control" type="file" name="uploadFile[]" accept="image/*" multiple
                             title="Select Images" />
                         <button class="btn btn-outline-primary" name="uploadBtn" title="Upload">
@@ -127,7 +123,7 @@ while ($data = mysqli_fetch_assoc($result)) {
                     <ul class="navbar-nav mb-1 mb-lg-0">
                         <li class="nav-item"></li>
                     </ul>
-                    <div class="!btn-group d-flex">
+                    <div class="!btn-group d-flex" <?php echo $isAdmin; ?>>
                         <button class="btn btn-outline-primary text-nowrap" data-bs-toggle="button" id="chkboxToggle"
                             title="Multi-Select Toggle (Click for More Options)"><i class="bi bi-ui-checks-grid"></i>
                             <i class="bi bi-box-arrow-right"></i></button>
@@ -137,21 +133,6 @@ while ($data = mysqli_fetch_assoc($result)) {
                             data-bs-target="#delModal" id="deleteBtnLink" title="Delete Selected"
                             style="display: none;">
                             <i class="bi bi-trash-fill"></i><i class="bi bi-ui-checks"></i></button>
-                        <!-- <button class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
-                        data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" id="chkboxDrop"
-                        style="display: none;"></button>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item">
-                            <button class="btn btn-outline-success" id="selectAll"><i
-                                    class="bi bi-check-square"></i></button>
-                            <button class="btn btn-outline-danger" id="deleteBtnLink"><i
-                                    class="bi bi-trash-fill"></i></button>
-                        </li>
-                    </ul> -->
-                        <!-- <p>
-                        <!?php $fileCount = new FilesystemIterator('images/');
-                        printf("%d Images", iterator_count($fileCount)); ?>
-                    </p> -->
                     </div>
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
                         <li class="nav-item"></li>

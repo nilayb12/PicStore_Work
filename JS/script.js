@@ -23,14 +23,38 @@ if (window.history.replaceState) {
 $('#circleSelect').on('changed.bs.select', function (e, clickedIndex, isSelected, prevVal) {
     $.ajax({
         type: "POST",
-        url: "modules/selectSector.php",
+        url: "modules/selectCity.php",
         data: { circle: e.target.value },
+        success: function (data) {
+            $('#citySelect').html(data);
+            $('#citySelect').selectpicker('refresh');
+        }
+    });
+});
+
+$('#citySelect').on('changed.bs.select', function (e, clickedIndex, isSelected, prevVal) {
+    $.ajax({
+        type: "POST",
+        url: "modules/selectSector.php",
+        data: { city: e.target.value },
         success: function (data) {
             $('#sectorSelect').html(data);
             $('#sectorSelect').selectpicker('refresh');
         }
         // }).done(function (data) {
         //     $('#sectorSelect').html(data);
+    });
+});
+
+$('#sectorSelect').on('changed.bs.select', function (e, clickedIndex, isSelected, prevVal) {
+    $.ajax({
+        type: "POST",
+        url: "index.php",
+        // data: { sector: e.target.value, city: $('#citySelect').val(), circle: $('#circleSelect').val() },
+        success: function (data) {
+            $('#pathVal').attr('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
+            // document.getElementById('pathVal').setAttribute('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
+        }
     });
 });
 
