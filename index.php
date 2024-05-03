@@ -5,7 +5,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: Login/");
     exit;
 }
-$isAdmin = $_SESSION['isAdmin'] == 0 ? 'style="display: none !important;"' : '';
+$isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
 
 // $query = "SELECT * FROM circle";
 // $result = mysqli_query($db, $query);
@@ -77,14 +77,14 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'style="display: none !important;"' : '';
                 <a class="navbar-brand" href="">
                     <img id="brand-logo"
                         src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Reliance_Jio_Logo.svg">
-                    <!img id="app-logo" src="Image DB-logos_white_Edit.png">Image DB    
+                    <!img id="app-logo" src="Image DB-logos_white_Edit.png">Image DB
                 </a>
                 <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <select class="dropdown selectpicker show-tick me-1" data-width="fit" title="Select Circle"
+                    <select class="dropdown selectpicker show-tick ms-4 me-1" data-width="fit" title="Select Circle"
                         data-show-subtext="true" data-live-search="true" data-live-search-placeholder="🔎" data-size="5"
                         data-style="btn-outline-primary text-body-emphasis" data-icon-base="bi"
                         data-tick-icon="bi-check-lg" data-hide-disabled="true" id="circleSelect">
@@ -95,7 +95,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'style="display: none !important;"' : '';
                         $result = mysqli_query($db, $query);
 
                         while ($data = mysqli_fetch_assoc($result)) {
-                            $sel = $data['CircleCode'] == $_SESSION['circle'] ? '' : 'disabled';
+                            // $sel = $data['CircleCode'] == $_SESSION['circle'] ? '' : 'disabled';
                             echo '<option data-subtext="' . $data['CircleName'] . '"' . $sel . '>' . $data['CircleCode'] . '</option>';
                         }
                         ?>
@@ -111,19 +111,21 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'style="display: none !important;"' : '';
         <nav class="navbar navbar-expand-md" style="z-index: 1000;">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="input-group me-1" id="uploadForm" method="post" action="" enctype="multipart/form-data"
-                        style="width: auto;" disabled>
+                    <form class="me-1" id="uploadForm" method="post" action="" enctype="multipart/form-data"
+                        style="width: auto;">
                         <input type="hidden" name="pathVal" id="pathVal" />
-                        <input class="form-control" type="file" name="uploadFile[]" accept="image/*" multiple
-                            title="Select Images" />
-                        <button class="btn btn-outline-primary" name="uploadBtn" title="Upload">
-                            <i class="bi bi-upload"></i></button>
+                        <fieldset class="input-group <?php echo $isAdmin; ?>" id="uploadGrp" disabled>
+                            <input class="form-control" type="file" name="uploadFile[]" accept="image/*" multiple
+                                title="Select Images" />
+                            <button class="btn btn-outline-primary" name="uploadBtn" title="Upload">
+                                <i class="bi bi-upload"></i></button>
+                        </fieldset>
                         <?php include ('modules/dbUpload.php'); ?>
                     </form>
                     <ul class="navbar-nav mb-1 mb-lg-0">
                         <li class="nav-item"></li>
                     </ul>
-                    <div class="!btn-group d-flex" <?php echo $isAdmin; ?>>
+                    <div class="!btn-group d-flex <?php echo $isAdmin; ?>">
                         <button class="btn btn-outline-primary text-nowrap" data-bs-toggle="button" id="chkboxToggle"
                             title="Multi-Select Toggle (Click for More Options)"><i class="bi bi-ui-checks-grid"></i>
                             <i class="bi bi-box-arrow-right"></i></button>
@@ -155,13 +157,13 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'style="display: none !important;"' : '';
         </nav>
     </div>
 
-    <div id="imgContainer">
+    <div id="imgContainer" style="min-height: 68vh;">
         <?php include ('modules/imgContainer.php'); ?>
     </div>
 
     <nav class="navbar bg-secondary-subtle border-top border-secondary !justify-content-center"
-        aria-label="Page Navigation" style="z-index: 1001;">
-        <ul class="pagination">
+        aria-label="Page Navigation" comment="z-index: 1001;">
+        <!-- <ul class="pagination">
             <li class="page-item" title="First"><a class="page-link" href="#"><i class="bi bi-chevron-bar-left"></i></a>
             </li>
             <li class="page-item" title="Previous"><a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>
@@ -171,7 +173,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'style="display: none !important;"' : '';
             </li>
             <li class="page-item" title="Last"><a class="page-link" href="#"><i class="bi bi-chevron-bar-right"></i></a>
             </li>
-        </ul>
+        </ul> -->
         <p class="alert alert-primary">Showing <span id="imgCount">x</span> Images</p>
     </nav>
     <script src="JS/script.js"></script>

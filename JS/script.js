@@ -26,8 +26,11 @@ $('#circleSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
         url: "modules/selectCity.php",
         data: { circle: e.target.value },
         success: function (data) {
+            $('#uploadGrp').attr('disabled', 'true');
             $('#citySelect').html(data);
             $('#citySelect').selectpicker('refresh');
+            $('#sectorSelect').html(data);
+            $('#sectorSelect').selectpicker('refresh');
         }
     });
 });
@@ -38,6 +41,7 @@ $('#citySelect').on('changed.bs.select', function (e, clickedIndex, isSelected, 
         url: "modules/selectSector.php",
         data: { city: e.target.value },
         success: function (data) {
+            $('#uploadGrp').attr('disabled', 'true');
             $('#sectorSelect').html(data);
             $('#sectorSelect').selectpicker('refresh');
         }
@@ -50,10 +54,15 @@ $('#sectorSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
     $.ajax({
         type: "POST",
         url: "index.php",
-        // data: { sector: e.target.value, city: $('#citySelect').val(), circle: $('#circleSelect').val() },
         success: function (data) {
-            $('#pathVal').attr('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
-            // document.getElementById('pathVal').setAttribute('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
+            if (e.target.value == "") {
+                $('#uploadGrp').attr('disabled', 'true');
+            }
+            else {
+                $('#uploadGrp').removeAttr('disabled');
+                $('#pathVal').attr('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
+                // document.getElementById('pathVal').setAttribute('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
+            }
         }
     });
 });
@@ -63,7 +72,7 @@ document.getElementById('chkboxToggle').addEventListener('click', () => {
     $('.form-check-input').toggle();
     $('#selectAll').toggle();
     $('#deleteBtnLink').toggle();
-    // $('#chkboxDrop').toggle();
+
     chk.forEach((chk) => {
         chk.checked = false;
     });
