@@ -9,8 +9,6 @@
     while ($data = mysqli_fetch_assoc($result)) {
         ?>
         <figure class="!figure card border-secondary" id="figBox">
-            <!-- <input class="form-check-input" type="checkbox" name="imgSelect[]" style="display: none;"
-                value="<!?php echo $data['FileName']; ?>" /> -->
             <img class="!figure-img card-img-top img-fluid" title="Click to Zoom" id="figImg"
                 src="<?php echo $data['FilePath'] . '/' . $data['FileName']; ?>">
             <div class="card-header">

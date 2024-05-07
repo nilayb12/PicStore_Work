@@ -76,6 +76,7 @@ document.getElementById('chkboxToggle').addEventListener('click', () => {
     chk.forEach((chk) => {
         chk.checked = false;
     });
+    $('#chkboxToggle').find('i').toggleClass('bi-box-arrow-right bi-box-arrow-in-left');
     document.getElementById('selectAll').classList.replace('btn-outline-warning', 'btn-outline-success');
     document.getElementById('selectAll').firstChild.classList.replace('bi-x-square-fill', 'bi-check-square-fill');
 });
@@ -127,6 +128,7 @@ var cnt = chk.length;
     });
 });
 document.getElementById('imgCount').innerText = cnt;
+$('#imgCount').text() == '0' ? $('#imgCount').addClass('text-danger') : $('#imgCount').removeClass('text-danger');
 // $('#uplConfirm').click(function () {
 //     $.ajax({
 //         type: "POST",

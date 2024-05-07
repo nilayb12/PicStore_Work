@@ -51,6 +51,19 @@
     --bs-body-bg: black !important;
 }
 
+.dropdown-menu.dropdown-menu {
+    --bs-dropdown-padding-x: .125rem;
+    --bs-dropdown-padding-y: .125rem;
+
+    li {
+        margin: .125rem 0;
+
+        .dropdown-item {
+            border-radius: .25rem;
+        }
+    }
+}
+
 .btn-bd-primary.btn-bd-primary {
     --bd-violet-bg: #3a7754;
     --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
@@ -70,10 +83,10 @@
 
 .bd-mode-toggle {
     z-index: 1000;
-}
 
-.bd-mode-toggle .dropdown-menu .active .bi {
-    display: block !important;
+    .active .bi {
+        display: block !important;
+    }
 }
 
 .bootstrap-select.bootstrap-select .no-results.no-results {

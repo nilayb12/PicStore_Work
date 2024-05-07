@@ -105,6 +105,18 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     </ul> -->
                     <?php include ('modules/selectCity.php');
                     include ('modules/selectSector.php') ?>
+                    <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
+                        <li class="nav-item"></li>
+                    </ul>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-fill"></i> <?php echo $_SESSION['username']; ?></button>
+                        <ul class="dropdown-menu">
+                            <li><a class="btn btn-outline-danger dropdown-item" id="logout" href="Login/logout.php">
+                                    <!i class="bi bi-door-open-fill"></i> Sign Out
+                                </a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -117,7 +129,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         <fieldset class="input-group <?php echo $isAdmin; ?>" id="uploadGrp" disabled>
                             <input class="form-control" type="file" name="uploadFile[]" accept="image/*" multiple
                                 title="Select Images" />
-                            <button class="btn btn-outline-primary" name="uploadBtn" title="Upload">
+                            <button class="btn btn-primary" name="uploadBtn" title="Upload">
                                 <i class="bi bi-upload"></i></button>
                         </fieldset>
                         <?php include ('modules/dbUpload.php'); ?>
@@ -127,8 +139,8 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     </ul>
                     <div class="!btn-group d-flex <?php echo $isAdmin; ?>">
                         <button class="btn btn-outline-primary text-nowrap" data-bs-toggle="button" id="chkboxToggle"
-                            title="Multi-Select Toggle (Click for More Options)"><i class="bi bi-ui-checks-grid"></i>
-                            <i class="bi bi-box-arrow-right"></i></button>
+                            title="Multi-Select Toggle (Click to Show/Hide More Options)">
+                            <i class="bi bi-ui-checks-grid"></i> <i class="bi bi-box-arrow-right"></i></button>
                         <button class="btn btn-outline-success ms-1 me-1" id="selectAll" title="(De)Select All"
                             style="display: none;"><i class="bi bi-check-square-fill"></i></button>
                         <button class="btn btn-outline-danger text-nowrap" data-bs-toggle="modal"
@@ -139,25 +151,19 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
                         <li class="nav-item"></li>
                     </ul>
-                    <form class="input-group me-1" role="search" style="width: auto;">
+                    <form class="input-group w-auto" role="search">
                         <input class="form-control" type="search" id="searchBox" placeholder="Ctrl/Cmd + K"
                             aria-label="Search" />
                         <label class="input-group-text" title="Global Search"><i class="bi bi-search"></i></label>
                         <!-- <button class="btn btn-outline-info" title="Search" disabled><i class="bi bi-search"></i></button> -->
                         <?php include ('modules/dbSearch.php'); ?>
                     </form>
-                    <ul class="navbar-nav mb-1 mb-lg-0">
-                        <li class="nav-item"></li>
-                    </ul>
-                    <a class="btn btn-outline-danger text-nowrap" id="logout" title="Logout" href="Login/logout.php">
-                        <!-- <i class="bi bi-door-open-fill"></i> -->
-                        Sign Out</a>
                 </div>
             </div>
         </nav>
     </div>
 
-    <div id="imgContainer" style="min-height: 68vh;">
+    <div id="imgContainer">
         <?php include ('modules/imgContainer.php'); ?>
     </div>
 
@@ -174,7 +180,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
             <li class="page-item" title="Last"><a class="page-link" href="#"><i class="bi bi-chevron-bar-right"></i></a>
             </li>
         </ul> -->
-        <p class="alert alert-primary">Showing <span id="imgCount">x</span> Images</p>
+        <p class="alert alert-primary p-2">Showing <span id="imgCount">x</span> Image(s)</p>
     </nav>
     <script src="JS/script.js"></script>
 </body>
