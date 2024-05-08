@@ -140,7 +140,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     <div class="!btn-group d-flex <?php echo $isAdmin; ?>">
                         <button class="btn btn-outline-primary text-nowrap" data-bs-toggle="button" id="chkboxToggle"
                             title="Multi-Select Toggle (Click to Show/Hide More Options)">
-                            <i class="bi bi-ui-checks-grid"></i> <i class="bi bi-box-arrow-right"></i></button>
+                            <i class="bi bi-ui-checks-grid"></i> <i class="↔ bi bi-box-arrow-right"></i></button>
                         <button class="btn btn-outline-success ms-1 me-1" id="selectAll" title="(De)Select All"
                             style="display: none;"><i class="bi bi-check-square-fill"></i></button>
                         <button class="btn btn-outline-danger text-nowrap" data-bs-toggle="modal"
@@ -167,9 +167,9 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
         <?php include ('modules/imgContainer.php'); ?>
     </div>
 
-    <nav class="navbar bg-secondary-subtle border-top border-secondary !justify-content-center"
+    <!-- <nav class="navbar bg-secondary-subtle border-top border-secondary !justify-content-center"
         aria-label="Page Navigation" comment="z-index: 1001;">
-        <!-- <ul class="pagination">
+        <ul class="pagination">
             <li class="page-item" title="First"><a class="page-link" href="#"><i class="bi bi-chevron-bar-left"></i></a>
             </li>
             <li class="page-item" title="Previous"><a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>
@@ -180,8 +180,9 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
             <li class="page-item" title="Last"><a class="page-link" href="#"><i class="bi bi-chevron-bar-right"></i></a>
             </li>
         </ul> -->
-        <p class="alert alert-primary p-2">Showing <span id="imgCount">x</span> Image(s)</p>
-    </nav>
+    <p class="alert alert-info p-2 position-fixed bottom-0 start-0 mb-2 ms-2">
+        Showing <span id="imgCount">x</span> Image(s)</p>
+    <!-- </nav> -->
     <script src="JS/script.js"></script>
 </body>
 

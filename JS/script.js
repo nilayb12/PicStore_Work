@@ -76,7 +76,7 @@ document.getElementById('chkboxToggle').addEventListener('click', () => {
     chk.forEach((chk) => {
         chk.checked = false;
     });
-    $('#chkboxToggle').find('i').toggleClass('bi-box-arrow-right bi-box-arrow-in-left');
+    $('#chkboxToggle').find('.↔').toggleClass('bi-box-arrow-right bi-box-arrow-in-left');
     document.getElementById('selectAll').classList.replace('btn-outline-warning', 'btn-outline-success');
     document.getElementById('selectAll').firstChild.classList.replace('bi-x-square-fill', 'bi-check-square-fill');
 });
