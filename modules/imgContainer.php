@@ -5,7 +5,7 @@
     <input type="hidden" name="pathVal1" id="pathVal1" />
     <?php include ('dbDeleteSelected.php');
     $path = @$_POST['pathVal1'];
-    $query = "SELECT * FROM image";
+    $query = "SELECT * FROM image WHERE FilePath = ('images/$path')";
     $result = mysqli_query($db, $query);
 
     while ($data = mysqli_fetch_assoc($result)) {

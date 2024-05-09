@@ -26,7 +26,7 @@ $('#circleSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
         url: "modules/selectCity.php",
         data: { circle: e.target.value },
         success: function (data) {
-            $('#uploadGrp').attr('disabled', 'true');
+            $('#uploadGrp, #showImg').attr('disabled', 'true');
             $('#citySelect').html(data);
             $('#citySelect').selectpicker('refresh');
             $('#sectorSelect').html(data);
@@ -41,7 +41,7 @@ $('#citySelect').on('changed.bs.select', function (e, clickedIndex, isSelected, 
         url: "modules/selectSector.php",
         data: { city: e.target.value },
         success: function (data) {
-            $('#uploadGrp').attr('disabled', 'true');
+            $('#uploadGrp, #showImg').attr('disabled', 'true');
             $('#sectorSelect').html(data);
             $('#sectorSelect').selectpicker('refresh');
         }
@@ -56,10 +56,10 @@ $('#sectorSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
         url: "index.php",
         success: function (data) {
             if (e.target.value == "") {
-                $('#uploadGrp').attr('disabled', 'true');
+                $('#uploadGrp, #showImg').attr('disabled', 'true');
             }
             else {
-                $('#uploadGrp').removeAttr('disabled');
+                $('#uploadGrp, #showImg').removeAttr('disabled');
                 $('#pathVal, #pathVal1').attr('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
                 // document.getElementById('pathVal').setAttribute('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
                 // $("#imgContainer").load(" #imgContainer>*");

@@ -104,7 +104,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     </ul> -->
                     <?php include ('modules/selectCity.php');
                     include ('modules/selectSector.php') ?>
-                    <button class="btn btn-sm btn-outline-primary text-nowrap" id="showImg">Show Images</button>
+                    <button class="btn btn-outline-primary text-nowrap" id="showImg" disabled>Show Images</button>
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
                         <li class="nav-item"></li>
                     </ul>
