@@ -60,11 +60,16 @@ $('#sectorSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
             }
             else {
                 $('#uploadGrp').removeAttr('disabled');
-                $('#pathVal').attr('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
+                $('#pathVal, #pathVal1').attr('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
                 // document.getElementById('pathVal').setAttribute('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
+                // $("#imgContainer").load(" #imgContainer>*");
             }
         }
     });
+});
+
+$('#showImg').click(function () {
+    $("#imgForm").submit();
 });
 
 var chk = document.getElementsByName('imgSelect[]');
@@ -82,21 +87,19 @@ document.getElementById('chkboxToggle').addEventListener('click', () => {
 });
 
 $('#selectAll').click(function () {
-    // for (var i = 0; i < chk.length; ++i) {
-    //     if (chk[i].checked == false) {
-    //         chk[i].checked = true;
+    // chk.forEach((chk) => {
+    //     if (chk.checked == false) {
+    //         chk.checked = true;
     //     } else {
-    //         chk[i].checked = false;
+    //         chk.checked = false;
     //     }
-    // }
-    chk.forEach((chk) => {
-        if (chk.checked == false) {
-            chk.checked = true;
-        } else {
-            chk.checked = false;
-        }
+    // });
+    // chk.each(function () { this.checked = !this.checked; });
+    var chkStat = $(this).hasClass('btn-outline-success') ? true : false;
+    $('.form-check-input').each(function () {
+        $(this).prop('checked', chkStat);
     });
-    $(this).toggleClass('btn-outline-success btn-outline-warning')
+    $(this).toggleClass('btn-outline-success btn-outline-warning');
     $(this).find('i').toggleClass('bi-check-square-fill bi-x-square-fill');
 });
 
@@ -125,6 +128,7 @@ var cnt = chk.length;
             }
         });
         document.getElementById('imgCount').innerText = cnt;
+        $('#imgCount').text() == '0' ? $('#imgCount').addClass('text-danger') : $('#imgCount').removeClass('text-danger');
     });
 });
 document.getElementById('imgCount').innerText = cnt;

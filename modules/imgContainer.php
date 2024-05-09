@@ -1,8 +1,10 @@
 <?php include_once ('dbConfig.php') ?>
 
-<form id="imgForm" method="post" action="" enctype="multipart/form-data">
-    <button class="btn" name="deleteBtn" id="deleteBtn" style="display: none;"></button>
+<form id="imgForm" method="post" action="">
+    <button class="btn d-none" name="deleteBtn" id="deleteBtn"></button>
+    <input type="hidden" name="pathVal1" id="pathVal1" />
     <?php include ('dbDeleteSelected.php');
+    $path = @$_POST['pathVal1'];
     $query = "SELECT * FROM image";
     $result = mysqli_query($db, $query);
 

@@ -76,8 +76,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
             <div class="container-fluid">
                 <a class="navbar-brand" href="">
                     <img id="brand-logo"
-                        src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Reliance_Jio_Logo.svg">
-                    <!img id="app-logo" src="Image DB-logos_white_Edit.png">Image DB
+                        src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Reliance_Jio_Logo.svg"> Image DB
                 </a>
                 <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
@@ -105,6 +104,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     </ul> -->
                     <?php include ('modules/selectCity.php');
                     include ('modules/selectSector.php') ?>
+                    <button class="btn btn-sm btn-outline-primary text-nowrap" id="showImg">Show Images</button>
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
                         <li class="nav-item"></li>
                     </ul>

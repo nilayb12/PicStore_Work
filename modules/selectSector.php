@@ -1,7 +1,7 @@
 <?php include_once ('dbConfig.php');
 $city = @$_POST['city']; ?>
 
-<select class="dropdown selectpicker show-tick" data-width="fit" title="Select SAP ID" data-show-subtext="true"
+<select class="dropdown selectpicker show-tick me-1" data-width="fit" title="Select SAP ID" data-show-subtext="true"
     data-live-search="true" data-live-search-placeholder="🔎" data-size="10"
     data-style="btn-outline-primary text-body-emphasis" data-icon-base="bi" data-tick-icon="bi-check-lg"
     id="sectorSelect">
