@@ -9,7 +9,7 @@ if (isset($_POST['deleteBtn'])) {
             $result = mysqli_query($db, $query);
             while ($data = mysqli_fetch_assoc($result)) {
                 mysqli_query($db, $delQuery);
-                unlink($data['FilePath'] . '/' . $data['FileName']);
+                unlink('images/' . $data['FilePath'] . '/' . $data['FileName']);
             }
         }
     } else {

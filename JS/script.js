@@ -1,10 +1,12 @@
 var figs = document.getElementsByTagName('figure');
 for (const fig of figs) {
     fig.style.width = window.innerHeight / 2.5 + 'px';
+    fig.children[1].children[1].style.width = window.innerHeight / 3.17 + 'px';
 }
 window.addEventListener('resize', () => {
     for (const fig of figs) {
         fig.style.width = window.innerHeight / 2.5 + 'px';
+        fig.children[1].children[1].style.width = window.innerHeight / 3.17 + 'px';
     }
 });
 

@@ -5,18 +5,18 @@
     <input type="hidden" name="pathVal1" id="pathVal1" />
     <?php include ('dbDeleteSelected.php');
     $path = @$_POST['pathVal1'];
-    $query = "SELECT * FROM image WHERE FilePath = ('images/$path')";
+    $query = "SELECT * FROM image WHERE FilePath = ('$path')";
     $result = mysqli_query($db, $query);
 
     while ($data = mysqli_fetch_assoc($result)) {
         ?>
         <figure class="!figure card border-secondary" id="figBox">
             <img class="!figure-img card-img-top img-fluid" title="Click to Zoom" id="figImg"
-                src="<?php echo $data['FilePath'] . '/' . $data['FileName']; ?>">
+                src="<?php echo 'images/' . $data['FilePath'] . '/' . $data['FileName']; ?>">
             <div class="card-header">
                 <input class="form-check-input" type="checkbox" name="imgSelect[]" style="display: none;"
                     value="<?php echo $data['FileName']; ?>" id="<?php echo $data['FileName']; ?>" />
-                <label class="figure-caption !card-title" for="<?php echo $data['FileName']; ?>">
+                <label class="figure-caption !card-title text-truncate" for="<?php echo $data['FileName']; ?>">
                     <?php echo $data['FileName']; ?>
                 </label>
             </div>
