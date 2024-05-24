@@ -17,7 +17,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="uplModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+<!-- <div class="modal fade" id="uplModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
     aria-labelledby="uplModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content bg-secondary-subtle">
@@ -40,4 +40,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

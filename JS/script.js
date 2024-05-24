@@ -31,8 +31,10 @@ $('#circleSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
             $('#uploadGrp, #showImg').attr('disabled', 'true');
             $('#citySelect').html(data);
             $('#citySelect').selectpicker('refresh');
-            $('#sectorSelect').html(data);
-            $('#sectorSelect').selectpicker('refresh');
+            if (e.target.value == "") {
+                $('#sectorSelect').html(data);
+                $('#sectorSelect').selectpicker('refresh');
+            }
         }
     });
 });
@@ -57,9 +59,7 @@ $('#sectorSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
         type: "POST",
         url: "index.php",
         success: function (data) {
-            if (e.target.value == "") {
-                $('#uploadGrp, #showImg').attr('disabled', 'true');
-            }
+            if (e.target.value == "") { $('#uploadGrp, #showImg').attr('disabled', 'true'); }
             else {
                 $('#uploadGrp, #showImg').removeAttr('disabled');
                 $('#pathVal, #pathVal1').attr('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);

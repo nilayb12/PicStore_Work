@@ -136,10 +136,12 @@ input[type=file]::file-selector-button {
 }
 
 #figDetails {
-    height: 10em;
+    height: 14em;
     overflow: auto;
 }
 
-figcaption {
-    display: inline-block;
+.figure-caption.figure-caption {
+    font-size: .875em;
+    color: var(--bs-secondary-color);
+    height: 100%;
 }

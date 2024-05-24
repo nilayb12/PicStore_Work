@@ -31,9 +31,14 @@ if (isset($_POST['uploadBtn'])) {
         return $ret;
     }
     if (count($errDupl) > 0) {
+        // echo "<script type='text/javascript'>
+        //     $(document).ready(function(){
+        //         $('#uplModal').modal('show');
+        //     });
+        // </script>";
         echo "<script type='text/javascript'>
             $(document).ready(function(){
-                $('#uplModal').modal('show');
+                alert('File(s) Not Uploaded:" . '\n' . arrWrite($errDupl) . "New Image(s) can\'t have the Same Name as Existing Image(s).');
             });
         </script>";
     }
