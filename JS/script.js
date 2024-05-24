@@ -30,11 +30,8 @@ $('#circleSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
         success: function (data) {
             $('#uploadGrp, #showImg').attr('disabled', 'true');
             $('#citySelect').html(data);
-            $('#citySelect').selectpicker('refresh');
-            if (e.target.value == "") {
-                $('#sectorSelect').html(data);
-                $('#sectorSelect').selectpicker('refresh');
-            }
+            $('#sectorSelect').html('');
+            $('#citySelect, #sectorSelect').selectpicker('refresh');
         }
     });
 });
