@@ -157,7 +157,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         <li class="nav-item"></li>
                     </ul>
                     <form class="input-group w-auto" role="search">
-                        <input class="form-control" type="search" id="searchBox" placeholder="Ctrl/Cmd + K"
+                        <input class="form-control" type="search" id="searchBox" placeholder="Ctrl/⌘ + K"
                             aria-label="Search" />
                         <label class="input-group-text" title="Global Search"><i class="bi bi-search"></i></label>
                         <!-- <button class="btn btn-outline-info" title="Search" disabled><i class="bi bi-search"></i></button> -->

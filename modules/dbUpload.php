@@ -24,7 +24,7 @@ if (isset($_POST['uploadBtn'])) {
     }
     function arrWrite($errArr)
     {
-        $ret = '';
+        $ret = 'File(s) Not Uploaded:\n';
         foreach ($errArr as $i) {
             $ret .= '→ ' . $i . '\n';
         }
@@ -38,14 +38,14 @@ if (isset($_POST['uploadBtn'])) {
         // </script>";
         echo "<script type='text/javascript'>
             $(document).ready(function(){
-                alert('File(s) Not Uploaded:" . '\n' . arrWrite($errDupl) . "New Image(s) can\'t have the Same Name as Existing Image(s).');
+                alert('" . arrWrite($errDupl) . "New Image(s) can\'t have the Same Name as Existing Image(s).');
             });
         </script>";
     }
     if (count($errSize) > 0) {
         echo "<script type='text/javascript'>
             $(document).ready(function(){
-                alert('File(s) Not Uploaded:" . '\n' . arrWrite($errSize) . "Size must be < 4MB.');
+                alert('" . arrWrite($errSize) . "Size must be < 4MB.');
             });
         </script>";
     }
