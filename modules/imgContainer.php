@@ -10,13 +10,22 @@
 
     if (mysqli_num_rows($result) == 0) {
         // file_get_contents('emptyfolder.svg', true)
-        echo '<p class="alert text-nowrap">';
-        if (empty($path)) {
-            echo 'Navigate to View Image(s).';
-        } else {
-            echo '<i class="bi bi-file-earmark-x-fill"></i> No Image(s) for ' . substr($path, 8) . '. Try Uploading some.';
-        }
-        echo '</p>';
+        echo '<div class="pt-5 text-center">';
+        if (empty($path)) { ?>
+            <img class="my-3" src="./Reliance_Jio_Logo.svg" width="160rem" height="160rem"></img>
+            <h1>Home Page</h1>
+            <p class="mx-auto fs-5 text-muted">
+                Navigate to SAP/Site IDs using Above Controls to View Image(s).
+            </p>
+        <?php } else { ?>
+            <h1 class="my-5"><i class="bi bi-file-earmark-x-fill"></i></h1>
+            <p class="mx-auto fs-5 text-muted">
+                No Image(s) for <code><?php echo substr($path, 8); ?></code>.<br>
+                Try Uploading some or Navigate to SAP/Site IDs using Above Controls.<br>
+                Reload to GoTo Home Page.
+            </p>
+        <?php }
+        echo '</div>';
     } else {
         while ($data = mysqli_fetch_assoc($result)) {
             ?>

@@ -75,8 +75,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
         <nav class="navbar navbar-expand-md" style="z-index: 1002;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="">
-                    <img id="brand-logo"
-                        src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Reliance_Jio_Logo.svg"> Image DB
+                    <img id="brand-logo" src="Reliance_Jio_Logo.svg"> Image DB
                 </a>
                 <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
