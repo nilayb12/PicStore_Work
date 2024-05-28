@@ -91,10 +91,13 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         <?php
                         $query = "SELECT * FROM circle";
                         $result = mysqli_query($db, $query);
+                        $sel = '';
 
                         while ($data = mysqli_fetch_assoc($result)) {
-                            // $sel = $data['CircleCode'] == $_SESSION['circle'] ? '' : 'disabled';
-                            echo '<option data-subtext="' . $data['CircleName'] . '"' . $sel . '>' . $data['CircleCode'] . '</option>';
+                            if ($_SESSION['circle'] != 'NHQ') {
+                                $sel = $data['CircleCode'] == $_SESSION['circle'] ? '' : 'disabled';
+                            }
+                            echo '<option data-subtext="' . $data['CircleCode'] . '" value="' . $data['CircleCode'] . '" ' . $sel . '>' . $data['CircleName'] . '</option>';
                         }
                         ?>
                     </select>
