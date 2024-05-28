@@ -161,7 +161,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     <form class="input-group w-auto" role="search">
                         <input class="form-control" type="search" id="searchBox" placeholder="Ctrl/⌘ + K"
                             aria-label="Search" />
-                        <label class="input-group-text" title="Global Search"><i class="bi bi-search"></i></label>
+                        <label class="input-group-text" title="Instant Search"><i class="bi bi-search"></i></label>
                         <!-- <button class="btn btn-outline-info" title="Search" disabled><i class="bi bi-search"></i></button> -->
                         <?php include ('modules/dbSearch.php'); ?>
                     </form>

@@ -132,17 +132,3 @@ var cnt = chk.length;
 });
 document.getElementById('imgCount').innerText = cnt;
 $('#imgCount').text() == '0' ? $('#imgCount').addClass('text-danger') : $('#imgCount').removeClass('text-danger');
-// $('#uplConfirm').click(function () {
-//     $.ajax({
-//         type: "POST",
-//         url: "dbUpload.php",
-//         data: { action: "true" },
-//         success: function (data) {
-//             alert(data);
-//         }
-//     })
-// });
-// $('.selectpicker').change(function () {
-//     var selectedItem = $('.selectpicker').val();
-//     alert(selectedItem);
-// });
