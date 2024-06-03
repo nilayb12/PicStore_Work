@@ -16,6 +16,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
 
 //         $circle = $data["CircleCode"];
 //         $query2 = "SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS City FROM 5g_data_30k WHERE CircleCode = ('$circle')";
+//         $query2 = "SELECT * FROM city WHERE CircleCode = ('$circle')";
 //         $result2 = mysqli_query($db, $query2);
 
 //         while ($data2 = mysqli_fetch_assoc($result2)) {

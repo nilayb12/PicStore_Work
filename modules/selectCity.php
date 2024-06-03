@@ -8,11 +8,12 @@ $circle = @$_POST['circle']; ?>
     <option data-divider="true" disabled></option>
     <option data-subtext="<Select City>" selected></option>
     <?php
-    $query = "SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS City FROM 5g_data_30k WHERE CircleCode = ('$circle') ORDER BY City ASC";
+    // $query = "SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS City FROM 5g_data_30k WHERE CircleCode = ('$circle') ORDER BY City ASC";
+    $query = "SELECT * FROM city WHERE CircleCode = ('$circle')";
     $result = mysqli_query($db, $query);
 
     while ($data = mysqli_fetch_assoc($result)) {
-        echo '<option data-subtext="' . $circle . '">' . $data['City'] . '</option>';
+        echo '<option data-subtext="' . $circle . '">' . $data['CityCode'] . '</option>';
     }
     ?>
 </select>
