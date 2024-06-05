@@ -115,7 +115,7 @@ window.addEventListener("keydown", (e) => {
 
 var imgDetails = document.querySelectorAll('.card');
 var cnt = chk.length;
-['keyup', 'click'].forEach(function (e) {
+['keyup', 'click', 'input'].forEach(function (e) {
     document.getElementById('searchBox').addEventListener(e, (e) => {
         cnt = 0;
         imgDetails.forEach((imgDetail) => {
@@ -132,3 +132,27 @@ var cnt = chk.length;
 });
 document.getElementById('imgCount').innerText = cnt;
 $('#imgCount').text() == '0' ? $('#imgCount').addClass('text-danger') : $('#imgCount').removeClass('text-danger');
+
+$('#searchSAP').on("keyup input", function () {
+    var searchSAPVal = $(this).val();
+    if (searchSAPVal.length) {
+        // $.post("modules/dbSearchSAP.php", { term: inputVal }).done(function (data) {
+        //     $('#searchRes').html(data);
+        // });
+        $.ajax({
+            type: "POST",
+            url: "modules/dbSearchSAP.php",
+            data: { term: searchSAPVal },
+            success: function (data) {
+                $('#searchRes').html(data);
+            }
+        });
+    } else {
+        $('#searchRes').empty();
+    }
+});
+
+$(document).on("click", "#searchRes li", function () {
+    $(this).parents("#searchSap").val($(this).text());
+    $(this).parent("#searchRes").empty();
+});

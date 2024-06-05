@@ -109,6 +109,19 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     include ('modules/selectSector.php') ?>
                     <button class="btn btn-success text-nowrap" id="showImg" disabled>
                         <i class="bi bi-images"></i> Show</button>
+                    <ul class="navbar-nav mb-1 mb-lg-0 ms-1">
+                        <li class="nav-item"></li>
+                    </ul>
+                    <form class="w-auto" role="search">
+                        <div class="input-group">
+                            <input class="form-control" type="search" id="searchSAP" placeholder="SAP/Site ID"
+                                aria-label="Search" />
+                            <label class="input-group-text" title="Search SAP/Site ID">
+                                <i class="bi bi-search"></i></label>
+                        </div>
+                        <ul class="list-group" id="searchRes"></ul>
+                        <!-- <!?php include ('modules/dbSearchSAP.php'); ?> -->
+                    </form>
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
                         <li class="nav-item"></li>
                     </ul>
@@ -119,7 +132,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                             <li><a class="btn btn-outline-danger dropdown-item" id="logout" href="Login/logout.php">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                        <path fill="#7f7f7f"
+                                        <path fill="currentColor"
                                             d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
                                     </svg> Sign Out
                                 </a></li>
@@ -164,7 +177,6 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                             aria-label="Search" />
                         <label class="input-group-text" title="Instant Search"><i class="bi bi-search"></i></label>
                         <!-- <button class="btn btn-outline-info" title="Search" disabled><i class="bi bi-search"></i></button> -->
-                        <?php include ('modules/dbSearch.php'); ?>
                     </form>
                 </div>
             </div>
@@ -188,7 +200,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
             <li class="page-item" title="Last"><a class="page-link" href="#"><i class="bi bi-chevron-bar-right"></i></a>
             </li>
         </ul> -->
-    <p class="alert alert-info p-2 position-fixed bottom-0 start-0 mb-2 ms-2">
+    <p class="alert alert-info p-2 position-fixed bottom-0 start-0 mb-1 ms-1">
         Showing <span id="imgCount">x</span> Image(s)</p>
     <!-- </nav> -->
     <script src="JS/script.js"></script>
