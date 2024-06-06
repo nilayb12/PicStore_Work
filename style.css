@@ -82,7 +82,7 @@
 }
 
 .bd-mode-toggle {
-    z-index: 1000;
+    /* z-index: 1000; */
 
     .active .bi {
         display: block !important;

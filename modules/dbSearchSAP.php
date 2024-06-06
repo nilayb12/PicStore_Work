@@ -1,6 +1,6 @@
 <?php include_once ('dbConfig.php');
 
-if (isset($_REQUEST["term"])) {
+if (isset($_REQUEST['term'])) {
     $sql = "SELECT DISTINCT SAP_ID FROM 5g_data WHERE SAP_ID LIKE ?";
 
     if ($stmt = mysqli_prepare($db, $sql)) {
@@ -12,13 +12,11 @@ if (isset($_REQUEST["term"])) {
 
             if (mysqli_num_rows($result) > 0) {
                 while ($data = mysqli_fetch_assoc($result)) {
-                    echo '<li class="list-group-item">' . $data['SAP_ID'] . '</li>';
+                    echo '<li><a class="btn dropdown-item">' . $data['SAP_ID'] . '</a></li>';
                 }
             } else {
-                echo '<li class="list-group-item">No Match Found</li>';
+                echo '<li><a class="dropdown-item">❌ No Match Found</a></li>';
             }
-        } else {
-            echo 'ERROR: Could not able to execute $sql. ' . mysqli_error($link);
         }
     }
     mysqli_stmt_close($stmt);

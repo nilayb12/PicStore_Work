@@ -145,10 +145,12 @@ $('#searchSAP').on("keyup input", function () {
             data: { term: searchSAPVal },
             success: function (data) {
                 $('#searchRes').html(data);
+                $('#searchRes').addClass('show');
             }
         });
     } else {
         $('#searchRes').empty();
+        $('#searchRes').removeClass('show');
     }
 });
 

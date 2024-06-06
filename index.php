@@ -73,7 +73,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
     include ('modules/colorToggle.php'); ?>
 
     <div class="sticky-top bg-secondary-subtle border-bottom border-secondary">
-        <nav class="navbar navbar-expand-md" style="z-index: 1002;">
+        <nav class="navbar navbar-expand-md z-1">
             <div class="container-fluid">
                 <a class="navbar-brand" href="">
                     <img id="brand-logo" src="Reliance_Jio_Logo.svg"> Image DB
@@ -119,7 +119,8 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                             <label class="input-group-text" title="Search SAP/Site ID">
                                 <i class="bi bi-search"></i></label>
                         </div>
-                        <ul class="list-group" id="searchRes"></ul>
+                        <ul class="dropdown-menu overflow-auto" id="searchRes" style="max-height: 14rem;">
+                        </ul>
                         <!-- <!?php include ('modules/dbSearchSAP.php'); ?> -->
                     </form>
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
@@ -141,7 +142,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                 </div>
             </div>
         </nav>
-        <nav class="navbar navbar-expand-md" style="z-index: 1000;">
+        <nav class="navbar navbar-expand-md">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <form class="me-1" id="uploadForm" method="post" action="" enctype="multipart/form-data"
@@ -150,7 +151,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         <fieldset class="input-group <?php echo $isAdmin; ?>" id="uploadGrp" disabled>
                             <input class="form-control" type="file" name="uploadFile[]" accept="image/*" multiple
                                 title="Select Images" />
-                            <button class="btn btn-primary" name="uploadBtn" title="Upload">
+                            <button class="btn btn-primary z-0" name="uploadBtn" title="Upload">
                                 <i class="bi bi-upload"></i></button>
                         </fieldset>
                         <?php include ('modules/dbUpload.php'); ?>
