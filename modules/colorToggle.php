@@ -21,7 +21,8 @@
 
 <div class="dropdown position-fixed bottom-0 end-0 mb-1 me-1 bd-mode-toggle z-1">
     <button class="btn btn-bd-primary dropdown-toggle d-flex align-items-center" id="bd-theme" aria-expanded="false"
-        data-bs-toggle="dropdown" aria-label="Toggle theme (auto)" title="Toggle Theme">
+        data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+        <span class="stretched-link" data-bs-toggle="tooltip" title="Toggle Theme"></span>
         <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
             <use href="#circle-half"></use>
         </svg>

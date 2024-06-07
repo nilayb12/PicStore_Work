@@ -44,10 +44,11 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
 <head>
     <link rel="icon" type="image/png" sizes="96x96" href="https://img.icons8.com/dusk/64/000000/upload--v1.png">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css"> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+    <link href="Bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> -->
+    <link rel="stylesheet" href="Bootstrap/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css"
@@ -59,10 +60,10 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
 <body>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/js/all.min.js"></script> -->
+        crossorigin="anonymous"></script> -->
+    <script src="Bootstrap/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"
         integrity="sha512-EC3CQ+2OkM+ZKsM1dbFAB6OGEPKRxi6EDRnZW9ys8LghQRAq6cXPUgXCCujmDrXdodGXX9bqaaCRtwj4h4wgSQ=="
@@ -83,7 +84,23 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <select class="dropdown selectpicker show-tick ms-4 me-1" data-width="fit" title="Select Circle"
+                    <div class="dropdown ms-4">
+                        <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                            Select SAP/Site ID
+                        </button>
+                        <ul class="dropdown-menu" id="SAPSelectionType">
+                            <li><button class="dropdown-item btn btn-outline-primary"
+                                    onclick="$('#circleSelect, #citySelect, #sectorSelect').selectpicker('show'); $('#searchSAP').addClass('d-none');">
+                                    From Dropdowns</button></li>
+                            <li><button class="dropdown-item btn btn-outline-primary"
+                                    onclick="$('#circleSelect, #citySelect, #sectorSelect').selectpicker('hide'); $('#searchSAP').removeClass('d-none');">
+                                    Search Directly</button></li>
+                        </ul>
+                    </div>
+                    <ul class="navbar-nav mb-1 mb-lg-0 me-1">
+                        <li class="nav-item"></li>
+                    </ul>
+                    <select class="dropdown selectpicker show-tick me-1" data-width="fit" title="Select Circle"
                         data-show-subtext="true" data-live-search="true" data-live-search-placeholder="🔎" data-size="5"
                         data-style="btn-outline-primary text-body-emphasis" data-icon-base="bi"
                         data-tick-icon="bi-check-lg" data-hide-disabled="true" id="circleSelect">
@@ -102,27 +119,27 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         }
                         ?>
                     </select>
-                    <!-- <ul class="navbar-nav mb-1 mb-lg-0">
-                        <li class="nav-item"></li>
-                    </ul> -->
                     <?php include ('modules/selectCity.php');
                     include ('modules/selectSector.php') ?>
-                    <button class="btn btn-success text-nowrap" id="showImg" disabled>
-                        <i class="bi bi-images"></i> Show</button>
-                    <ul class="navbar-nav mb-1 mb-lg-0 ms-1">
+                    <ul class="navbar-nav mb-1 mb-lg-0">
                         <li class="nav-item"></li>
                     </ul>
-                    <form class="w-auto" role="search">
+                    <form class="w-auto d-none" id="searchSAP" role="search">
                         <div class="input-group">
-                            <input class="form-control" type="search" id="searchSAP" placeholder="SAP/Site ID"
+                            <input class="form-control" type="search" minlength="6" placeholder="SAP/Site ID"
                                 aria-label="Search" />
-                            <label class="input-group-text" title="Search SAP/Site ID">
+                            <label class="input-group-text" data-bs-toggle="tooltip" title="Search SAP/Site ID">
                                 <i class="bi bi-search"></i></label>
                         </div>
                         <ul class="dropdown-menu overflow-auto" id="searchRes" style="max-height: 14rem;">
                         </ul>
                         <!-- <!?php include ('modules/dbSearchSAP.php'); ?> -->
                     </form>
+                    <ul class="navbar-nav mb-1 mb-lg-0 me-1">
+                        <li class="nav-item"></li>
+                    </ul>
+                    <button class="btn btn-success text-nowrap d-none" id="showImg" disabled>
+                        <i class="bi bi-images"></i> Show</button>
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
                         <li class="nav-item"></li>
                     </ul>
@@ -145,38 +162,42 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
         <nav class="navbar navbar-expand-md">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="me-1" id="uploadForm" method="post" action="" enctype="multipart/form-data"
-                        style="width: auto;">
+                    <form class="w-auto" id="uploadForm" method="post" action="" enctype="multipart/form-data">
                         <input type="hidden" name="pathVal" id="pathVal" />
                         <fieldset class="input-group <?php echo $isAdmin; ?>" id="uploadGrp" disabled>
                             <input class="form-control" type="file" name="uploadFile[]" accept="image/*" multiple
-                                title="Select Images" />
-                            <button class="btn btn-primary z-0" name="uploadBtn" title="Upload">
-                                <i class="bi bi-upload"></i></button>
+                                data-bs-toggle="tooltip" title="Select Images" />
+                            <button class="btn btn-primary z-0" name="uploadBtn" data-bs-toggle="tooltip"
+                                title="Upload"><i class="bi bi-upload"></i></button>
                         </fieldset>
                         <?php include ('modules/dbUpload.php'); ?>
                     </form>
-                    <ul class="navbar-nav mb-1 mb-lg-0">
+                    <ul class="navbar-nav mb-1 mb-lg-0 me-1">
                         <li class="nav-item"></li>
                     </ul>
                     <div class="!btn-group d-flex <?php echo $isAdmin; ?>">
-                        <button class="btn btn-outline-primary text-nowrap" data-bs-toggle="button" id="chkboxToggle"
-                            title="Multi-Select Toggle (Click to Show/Hide More Options)">
-                            <i class="bi bi-ui-checks-grid"></i> <i class="↔ bi bi-box-arrow-right"></i></button>
-                        <button class="btn btn-outline-success ms-1 me-1" id="selectAll" title="(De)Select All"
-                            style="display: none;"><i class="bi bi-check-square-fill"></i></button>
+                        <button class="btn btn-outline-primary text-nowrap" data-bs-toggle="button" id="chkboxToggle">
+                            <span data-bs-toggle="tooltip"
+                                title="Multi-Select Toggle (Click to Show/Hide More Options)">
+                                <i class="bi bi-ui-checks-grid"></i> <i class="↔ bi bi-box-arrow-right"></i>
+                            </span></button>
+                        <button class="btn btn-outline-success ms-1 me-1" id="selectAll" data-bs-toggle="tooltip"
+                            title="(De)Select All" style="display: none;">
+                            <i class="bi bi-check-square-fill"></i></button>
                         <button class="btn btn-outline-danger text-nowrap" data-bs-toggle="modal"
-                            data-bs-target="#delModal" id="deleteBtnLink" title="Delete Selected"
-                            style="display: none;">
-                            <i class="bi bi-trash-fill"></i><i class="bi bi-ui-checks"></i></button>
+                            data-bs-target="#delModal" id="deleteBtnLink" style="display: none;">
+                            <span data-bs-toggle="tooltip" title="Delete Selected">
+                                <i class="bi bi-trash-fill"></i><i class="bi bi-ui-checks"></i>
+                            </span></button>
                     </div>
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
                         <li class="nav-item"></li>
                     </ul>
-                    <form class="input-group w-auto" role="search">
+                    <form class="input-group w-auto" role="search" data-bs-toggle="tooltip" title="Instant Search">
                         <input class="form-control" type="search" id="searchBox" placeholder="Ctrl/⌘ + K"
                             aria-label="Search" />
-                        <label class="input-group-text" title="Instant Search"><i class="bi bi-search"></i></label>
+                        <label class="input-group-text" title="Instant Search">
+                            <i class="bi bi-search"></i></label>
                         <!-- <button class="btn btn-outline-info" title="Search" disabled><i class="bi bi-search"></i></button> -->
                     </form>
                 </div>
