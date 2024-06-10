@@ -28,7 +28,8 @@ if (window.history.replaceState) {
 }
 
 $('#SAPSelectionType li').click(function () {
-    $('#uploadGrp, #showImg').attr('disabled', true).removeClass('d-none');
+    $('#uploadGrp, #showImg').attr('disabled', true);
+    $('#showImg').removeClass('d-none');
     $('#circleSelect').val('default').selectpicker('refresh');
     $('#citySelect, #sectorSelect').html('').selectpicker('refresh');
     $('#searchSAP input').val('');
