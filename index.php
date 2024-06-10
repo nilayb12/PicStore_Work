@@ -85,8 +85,8 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="dropdown ms-4">
-                        <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                            Select SAP/Site ID
+                        <button class="btn btn-primary text-nowrap" id="SAPSelection" data-bs-toggle="dropdown">
+                            Select SAP/Site ID <i class="bi bi-caret-down-fill"></i>
                         </button>
                         <ul class="dropdown-menu" id="SAPSelectionType">
                             <li><button class="dropdown-item btn btn-outline-primary"
@@ -144,8 +144,9 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         <li class="nav-item"></li>
                     </ul>
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="bi bi-person-fill"></i> <?php echo $_SESSION['username']; ?></button>
+                        <button class="btn btn-secondary text-nowrap" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-fill"></i> <?php echo $_SESSION['username']; ?> <i
+                                class="bi bi-caret-down-fill"></i></button>
                         <ul class="dropdown-menu">
                             <li><a class="btn btn-outline-danger dropdown-item" id="logout" href="Login/logout.php">
                                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -181,7 +182,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                                 title="Multi-Select Toggle (Click to Show/Hide More Options)">
                                 <i class="bi bi-ui-checks-grid"></i> <i class="↔ bi bi-box-arrow-right"></i>
                             </span></button>
-                        <button class="btn btn-outline-success ms-1 me-1" id="selectAll" data-bs-toggle="tooltip"
+                        <button class="btn btn-outline-success mx-1" id="selectAll" data-bs-toggle="tooltip"
                             title="(De)Select All" style="display: none;">
                             <i class="bi bi-check-square-fill"></i></button>
                         <button class="btn btn-outline-danger text-nowrap" data-bs-toggle="modal"
@@ -193,10 +194,11 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
                         <li class="nav-item"></li>
                     </ul>
-                    <form class="input-group w-auto" role="search" data-bs-toggle="tooltip" title="Instant Search">
+                    <form class="input-group w-auto" role="search">
                         <input class="form-control" type="search" id="searchBox" placeholder="Ctrl/⌘ + K"
                             aria-label="Search" />
-                        <label class="input-group-text" title="Instant Search">
+                        <label class="input-group-text" data-bs-toggle="tooltip"
+                            title="Instantly Search Images on Page">
                             <i class="bi bi-search"></i></label>
                         <!-- <button class="btn btn-outline-info" title="Search" disabled><i class="bi bi-search"></i></button> -->
                     </form>

@@ -68,6 +68,9 @@
             </div> -->
             </figure>
         <?php }
+        echo '<script type="text/javascript">
+            $("#SAPSelection").html(`' . substr($path, 8) . ' <i class="bi bi-caret-down-fill"></i>' . '`);
+        </script>';
     }
     ?>
 </form>
