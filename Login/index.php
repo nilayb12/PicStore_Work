@@ -72,18 +72,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>User Sign-In</title>
     <link rel="icon" type="image/png" sizes="64x64"
         href="https://img.icons8.com/external-yogi-aprelliyanto-outline-color-yogi-aprelliyanto/64/000000/external-login-website-development-yogi-aprelliyanto-outline-color-yogi-aprelliyanto.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+    <link href="../Bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Bootstrap/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" type="text/css" href="../style2.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 
 <body class="d-flex align-items-center py-4">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
+    <script src="../Bootstrap/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
     <?php include ('../modules/colorToggle.php'); ?>
 
     <main class="form-signin m-auto">
@@ -95,8 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <img class="mb-4" src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Reliance_Jio_Logo.svg" alt=""
-                width="64" height="64">
+            <img class="mb-4" src="../Reliance_Jio_Logo.svg" alt="" width="64" height="64">
             <h1 class="h3 mb-3 fw-normal">Sign In</h1>
 
             <div class="form-floating mb-1">
@@ -123,7 +124,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </label>
             </div> -->
             <div class="d-flex my-3">
-                <button class="btn btn-primary w-50 me-1" type="submit" value="Login">Sign In</button>
+                <button class="btn btn-primary w-50 me-1" type="submit" value="Login">Sign In <i
+                        class="bi bi-box-arrow-in-right"></i></button>
                 <!-- <button class="btn btn-danger w-50" type="reset" value="Reset">Reset</button> -->
             </div>
             <!-- <p>New Users <a class="badge text-bg-info link-underline link-underline-opacity-0"
