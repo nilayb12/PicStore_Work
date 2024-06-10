@@ -126,7 +126,8 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     </ul>
                     <form class="w-auto d-none" id="searchSAP" role="search">
                         <div class="input-group">
-                            <input class="form-control" type="search" minlength="6" placeholder="SAP/Site ID"
+                            <code class="input-group-text">I-</code>
+                            <input class="form-control" type="search" minlength="4" placeholder="Circle-City-Code"
                                 aria-label="Search" />
                             <label class="input-group-text" data-bs-toggle="tooltip" title="Search SAP/Site ID">
                                 <i class="bi bi-search"></i></label>

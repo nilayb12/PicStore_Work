@@ -153,7 +153,7 @@ $('#searchSAP input').on("keyup input", function () {
         $.ajax({
             type: "POST",
             url: "modules/dbSearchSAP.php",
-            data: { term: searchSAPVal },
+            data: { term: $('#searchSAP code').text() + searchSAPVal },
             success: function (data) {
                 $('#searchRes').html(data);
                 $('#searchRes').addClass('show');
@@ -165,8 +165,8 @@ $('#searchSAP input').on("keyup input", function () {
     }
 });
 $(document).on("click", "#searchRes li", function () {
-    var SAPID = $(this).text();
-    $('#searchSAP input').val(SAPID);
+    var SAPID = $('#searchSAP code').text() + $(this).text();
+    $('#searchSAP input').val($(this).text());
     $('#searchRes').empty().removeClass('show');
     $('#uploadGrp, #showImg').removeAttr('disabled');
     $('#pathVal, #pathVal1').attr('value', SAPID.substr(2, 2) + '/' + SAPID.substr(5, 4) + '/' + SAPID);
