@@ -88,7 +88,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <div class="dropdown ms-4">
+                    <!-- <div class="dropdown ms-4">
                         <button class="btn btn-primary text-nowrap" id="SAPSelection" data-bs-toggle="dropdown">
                             Select SAP/Site ID <i class="bi bi-caret-down-fill"></i>
                         </button>
@@ -100,13 +100,27 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                                     onclick="$('#circleSelect, #citySelect, #sectorSelect').selectpicker('hide'); $('#searchSAP').removeClass('d-none');">
                                     Search Directly</button></li>
                         </ul>
-                    </div>
+                    </div> -->
+                    <span class="vr ms-md-4 me-md-2"></span>
+                    <ul class="list-group text-nowrap" id="SAPSelectionType">
+                        <li class="list-group-item">
+                            <input class="form-check-input" type="radio" name="SAPOpt" id="SAPOpt1"
+                                onclick="$('#circleSelect, #citySelect, #sectorSelect').selectpicker('show'); $('#searchSAP').addClass('d-none');" />
+                            <label class="stretched-link" for="SAPOpt1">
+                                <small>Select SAPID from Dropdown</small></label>
+                        </li>
+                        <li class="list-group-item">
+                            <input class="form-check-input" type="radio" name="SAPOpt" id="SAPOpt2"
+                                onclick="$('#circleSelect, #citySelect, #sectorSelect').selectpicker('hide'); $('#searchSAP').removeClass('d-none');" />
+                            <label class="stretched-link" for="SAPOpt2"><small>Search SAP/Site ID</small></label>
+                        </li>
+                    </ul>
                     <ul class="navbar-nav mb-1 mb-lg-0 me-1">
                         <li class="nav-item"></li>
                     </ul>
                     <select class="dropdown selectpicker show-tick me-1" data-width="fit" title="Select Circle"
                         data-show-subtext="true" data-live-search="true" data-live-search-placeholder="🔎" data-size="5"
-                        data-style="btn-outline-primary text-body-emphasis" data-icon-base="bi"
+                        data-style="btn-sm btn-outline-primary text-body-emphasis" data-icon-base="bi"
                         data-tick-icon="bi-check-lg" data-hide-disabled="true" id="circleSelect">
                         <option data-divider="true"></option>
                         <option data-subtext="<Select Circle>" selected></option>
@@ -129,7 +143,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         <li class="nav-item"></li>
                     </ul>
                     <form class="w-auto d-none" id="searchSAP" role="search">
-                        <fieldset class="input-group">
+                        <fieldset class="input-group input-group-sm">
                             <code class="input-group-text">I-</code>
                             <input class="form-control" type="search" minlength="4" placeholder="Circle-City-Sector"
                                 aria-label="Search" />
@@ -144,7 +158,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     <ul class="navbar-nav mb-1 mb-lg-0 me-1">
                         <li class="nav-item"></li>
                     </ul>
-                    <button class="btn btn-success text-nowrap d-none" id="showImg" disabled>
+                    <button class="btn btn-sm btn-success text-nowrap d-none" id="showImg" disabled>
                         <i class="bi bi-images"></i> Show</button>
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
                         <li class="nav-item"></li>

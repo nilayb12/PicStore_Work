@@ -86,7 +86,8 @@ $('#showImg').click(function () {
 
 var chk = document.getElementsByName('imgSelect[]');
 document.getElementById('chkboxToggle').addEventListener('click', () => {
-    $('.form-check-input').toggle();
+    // $('.form-check-input').toggle();
+    $('[name="imgSelect[]"]').toggle();
     $('#selectAll').toggle();
     $('#deleteBtnLink').toggle();
 
@@ -108,7 +109,8 @@ $('#selectAll').click(function () {
     // });
     // chk.each(function () { this.checked = !this.checked; });
     var chkStat = $(this).hasClass('btn-outline-success') ? true : false;
-    $('.form-check-input').each(function () {
+    // $('.form-check-input').each(function () {
+    $('[name="imgSelect[]"]').each(function () {
         $(this).prop('checked', chkStat);
     });
     $(this).toggleClass('btn-outline-success btn-outline-warning');

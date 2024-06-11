@@ -3,7 +3,7 @@ $circle = @$_POST['circle']; ?>
 
 <select class="dropdown selectpicker show-tick me-1" data-width="fit" title="Select City" data-show-subtext="true"
     data-live-search="true" data-live-search-placeholder="🔎" data-size="10"
-    data-style="btn-outline-primary text-body-emphasis" data-icon-base="bi" data-tick-icon="bi-check-lg"
+    data-style="btn-sm btn-outline-primary text-body-emphasis" data-icon-base="bi" data-tick-icon="bi-check-lg"
     id="citySelect">
     <option data-divider="true" disabled></option>
     <option data-subtext="<Select City>" selected></option>

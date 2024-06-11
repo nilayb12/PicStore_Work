@@ -64,6 +64,10 @@
     }
 }
 
+.list-group-item.list-group-item {
+    padding: 0.2rem 0.2rem;
+}
+
 .btn-bd-primary.btn-bd-primary {
     --bd-violet-bg: #3a7754;
     --bd-violet-rgb: 112.520718, 44.062154, 249.437846;

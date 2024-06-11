@@ -3,7 +3,7 @@ $city = @$_POST['city']; ?>
 
 <select class="dropdown selectpicker show-tick me-1" data-width="fit" title="Select SAP ID" data-show-subtext="true"
     data-live-search="true" data-live-search-placeholder="🔎" data-size="10"
-    data-style="btn-outline-primary text-body-emphasis" data-icon-base="bi" data-tick-icon="bi-check-lg"
+    data-style="btn-sm btn-outline-primary text-body-emphasis" data-icon-base="bi" data-tick-icon="bi-check-lg"
     id="sectorSelect">
     <option data-divider="true" disabled></option>
     <option data-subtext="<Select SAP ID>" selected></option>
