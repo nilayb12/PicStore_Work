@@ -125,14 +125,15 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         <li class="nav-item"></li>
                     </ul>
                     <form class="w-auto d-none" id="searchSAP" role="search">
-                        <div class="input-group">
+                        <fieldset class="input-group">
                             <code class="input-group-text">I-</code>
-                            <input class="form-control" type="search" minlength="4" placeholder="Circle-City-Code"
+                            <input class="form-control" type="search" minlength="4" placeholder="Circle-City-Sector"
                                 aria-label="Search" />
                             <label class="input-group-text" data-bs-toggle="tooltip" title="Search SAP/Site ID">
                                 <i class="bi bi-search"></i></label>
-                        </div>
-                        <ul class="dropdown-menu overflow-auto" id="searchRes" style="max-height: 14rem;">
+                        </fieldset>
+                        <ul class="dropdown-menu overflow-auto" id="searchRes"
+                            style="max-height: 14rem; margin-left: 2.7rem;">
                         </ul>
                         <!-- <!?php include ('modules/dbSearchSAP.php'); ?> -->
                     </form>

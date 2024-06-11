@@ -11,11 +11,13 @@ if (isset($_REQUEST['term'])) {
             $result = mysqli_stmt_get_result($stmt);
 
             if (mysqli_num_rows($result) > 0) {
+                echo '<li class="dropdown-item disabled">' . mysqli_num_rows($result) . ' IDs</li>
+                <li><hr class="dropdown-divider"></li>';
                 while ($data = mysqli_fetch_assoc($result)) {
                     echo '<li><a class="btn dropdown-item">' . substr($data['SAP_ID'], 2) . '</a></li>';
                 }
             } else {
-                echo '<li><a class="dropdown-item">❌ No Match Found</a></li>';
+                echo '<li class="dropdown-item disabled">❌ No Match Found</li>';
             }
         }
     }

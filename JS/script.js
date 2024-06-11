@@ -70,7 +70,8 @@ $('#sectorSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
             if (e.target.value == "") { $('#uploadGrp, #showImg').attr('disabled', 'true'); }
             else {
                 $('#uploadGrp, #showImg').removeAttr('disabled');
-                $('#pathVal, #pathVal1').attr('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
+                $('#pathVal, #pathVal1').attr('value', e.target.value);
+                // $('#pathVal, #pathVal1').attr('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
                 // document.getElementById('pathVal').setAttribute('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
                 // $("#imgContainer").load(" #imgContainer>*");
             }
@@ -79,6 +80,7 @@ $('#sectorSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
 });
 
 $('#showImg').click(function () {
+    $('#pathVal, #pathVal1').attr('value', $('#pathVal, #pathVal1').attr('value').substr(2, 2) + '/' + $('#pathVal, #pathVal1').attr('value').substr(5, 4) + '/' + $('#pathVal, #pathVal1').attr('value'));
     $('#imgForm').submit();
 });
 
@@ -169,5 +171,5 @@ $(document).on("click", "#searchRes li", function () {
     $('#searchSAP input').val($(this).text());
     $('#searchRes').empty().removeClass('show');
     $('#uploadGrp, #showImg').removeAttr('disabled');
-    $('#pathVal, #pathVal1').attr('value', SAPID.substr(2, 2) + '/' + SAPID.substr(5, 4) + '/' + SAPID);
+    $('#pathVal, #pathVal1').attr('value', SAPID);
 });
