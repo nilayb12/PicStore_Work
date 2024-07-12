@@ -54,12 +54,14 @@
 .dropdown-menu.dropdown-menu {
     --bs-dropdown-padding-x: .125rem;
     --bs-dropdown-padding-y: .125rem;
+    /* --bs-dropdown-font-size: .875rem; */
 
     li {
         margin: .125rem 0;
 
         .dropdown-item {
             border-radius: .25rem;
+            font-size: .875rem;
         }
     }
 }
@@ -105,26 +107,26 @@
 #logout svg {
     height: 1.1rem;
     width: 1.1rem;
-    margin-bottom: .1rem;
+    margin-top: -.15rem;
 }
 
 form {
-    width: auto;
+    /* width: auto; */
     justify-content: center;
     align-items: center;
 }
 
-input[type=file]::file-selector-button {
-    background-color: var(--bs-primary-bg-subtle);
+#uploadForm fieldset {
+    margin-right: -3rem;
 }
 
-/* #imgContainer {
-    overflow: auto;
-    display: flex;
-    width: fit-content;
-    justify-content: center;
-    align-items: center;
-} */
+input[type=file] {
+
+    &::file-selector-button {
+        /* background-color: var(--bs-primary-bg-subtle); */
+        display: none;
+    }
+}
 
 #imgForm {
     display: flex;

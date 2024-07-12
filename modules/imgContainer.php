@@ -9,8 +9,9 @@
     $result = mysqli_query($db, $query);
 
     if (mysqli_num_rows($result) == 0) {
-        echo '<div class="pt-5 text-center">';
+        echo '<div class="text-center">';
         if (empty($path)) { ?>
+            <div class="pt-5"></div>
             <svg class="my-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="8rem" height="8rem">
                 <circle cx="12" cy="12" r="12" fill="#0a2885"></circle>
                 <path
@@ -22,12 +23,37 @@
                 Navigate to SAP/Site IDs using Above Controls to View Image(s).
             </p>
         <?php } else { ?>
-            <h1 class="my-5"><i class="bi bi-file-earmark-x-fill"></i></h1>
+            <h1 class="my-5">
+                <!-- <i class="bi bi-file-earmark-x-fill"></i> -->
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="7rem" height="7rem">
+                    <path fill="currentColor"
+                        d="M20.54,2.46A5,5,0,1,0,22,6,5,5,0,0,0,20.54,2.46ZM14,6a3,3,0,0,1,3-3,3,3,0,0,1,1.29.3l-4,4A3,3,0,0,1,14,6Zm5.12,2.12a3.08,3.08,0,0,1-3.4.57l4-4A3,3,0,0,1,20,6,3,3,0,0,1,19.12,8.12ZM19,13a1,1,0,0,0-1,1v.39L16.52,12.9a2.87,2.87,0,0,0-3.93,0l-.7.71L9.41,11.12a2.87,2.87,0,0,0-3.93,0L4,12.61V7A1,1,0,0,1,5,6H9A1,1,0,0,0,9,4H5A3,3,0,0,0,2,7V19a3,3,0,0,0,3,3H17a3,3,0,0,0,.95-.17l.09,0A3,3,0,0,0,20,19.44a1.43,1.43,0,0,0,0-.22V14A1,1,0,0,0,19,13ZM5,20a1,1,0,0,1-1-1V15.43l2.9-2.89a.79.79,0,0,1,1.09,0l3.19,3.18h0L15.46,20Zm13-1a1,1,0,0,1-.18.54L13.3,15l.71-.7a.79.79,0,0,1,1.09,0L18,17.21Z" />
+                </svg> -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="7rem" height="7rem">
+                    <path fill="currentColor"
+                        d="M21.9,21.9l-8.49-8.49l0,0L3.59,3.59l0,0L2.1,2.1L0.69,3.51L3,5.83V19c0,1.1,0.9,2,2,2h13.17l2.31,2.31L21.9,21.9z M5,18 l3.5-4.5l2.5,3.01L12.17,15l3,3H5z M21,18.17L5.83,3H19c1.1,0,2,0.9,2,2V18.17z" />
+                </svg>
+            </h1>
             <p class="mx-auto fs-5 text-muted">
                 No Image(s) for <code><?php echo substr($path, 8); ?></code>.<br>
-                Try Uploading some or Navigate to other SAP/Site IDs using Above Controls.<br>
-                Reload to GoTo Home Page.
+                You can Try:
             </p>
+            <div class="list-group">
+                <button
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center text-muted"
+                    type="button" onclick="$('#uploadGrp label').focus();">
+                    Uploading some Images<i class="bi bi-upload"></i>
+                </button>
+                <button
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center text-muted"
+                    type="button" onclick="$('#SAPOpt1, #SAPOpt2').focus();">
+                    Navigating to other SAP/Site IDs<i class="bi bi-ui-radios"></i>
+                </button>
+                <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center text-muted"
+                    href="">
+                    Going to Home Page<i class="bi bi-arrow-clockwise"></i>
+                </a>
+            </div>
         <?php }
         echo '</div>';
     } else {

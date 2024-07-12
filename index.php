@@ -144,14 +144,13 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     </ul>
                     <form class="w-auto d-none" id="searchSAP" role="search">
                         <fieldset class="input-group input-group-sm">
-                            <code class="input-group-text">I-</code>
-                            <input class="form-control" type="search" minlength="4" placeholder="Circle-City-Sector"
+                            <!-- <code class="input-group-text">I-</code> -->
+                            <input class="form-control" type="search" minlength="6" placeholder="I-Circle-City-Sector"
                                 aria-label="Search" />
                             <label class="input-group-text" data-bs-toggle="tooltip" title="Search SAP/Site ID">
                                 <i class="bi bi-search"></i></label>
                         </fieldset>
-                        <ul class="dropdown-menu overflow-auto" id="searchRes"
-                            style="max-height: 14rem; margin-left: 2.7rem;">
+                        <ul class="dropdown-menu overflow-auto" id="searchRes" style="max-height: 14rem;">
                         </ul>
                         <!-- <!?php include ('modules/dbSearchSAP.php'); ?> -->
                     </form>
@@ -164,10 +163,10 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         <li class="nav-item"></li>
                     </ul>
                     <div class="dropdown">
-                        <button class="btn btn-secondary text-nowrap" data-bs-toggle="dropdown">
-                            <i class="bi bi-person-fill"></i> <?php echo $_SESSION['username']; ?> <i
-                                class="bi bi-caret-down-fill"></i></button>
-                        <ul class="dropdown-menu">
+                        <button class="btn btn-sm btn-secondary text-nowrap" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-fill"></i> <?php echo $_SESSION['username']; ?>
+                            <i class="bi bi-caret-down-fill ms-2"></i></button>
+                        <ul class="dropdown-menu dropdown-menu-md-end">
                             <li><a class="btn btn-outline-danger dropdown-item" id="logout" href="Login/logout.php">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
@@ -180,16 +179,18 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                 </div>
             </div>
         </nav>
-        <nav class="navbar navbar-expand-md">
+        <nav class="navbar navbar-expand-md z-0">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="w-auto" id="uploadForm" method="post" action="" enctype="multipart/form-data">
+                    <form class="!w-auto" id="uploadForm" method="post" action="" enctype="multipart/form-data">
                         <input type="hidden" name="pathVal" id="pathVal" />
-                        <fieldset class="input-group <?php echo $isAdmin; ?>" id="uploadGrp" disabled>
-                            <input class="form-control" type="file" name="uploadFile[]" accept="image/*" multiple
-                                data-bs-toggle="tooltip" title="Select Images" />
-                            <button class="btn btn-primary z-0" name="uploadBtn" data-bs-toggle="tooltip"
-                                title="Upload"><i class="bi bi-upload"></i></button>
+                        <fieldset class="input-group input-group-sm <?php echo $isAdmin; ?>" id="uploadGrp" disabled>
+                            <label class="btn btn-outline-primary text-body-emphasis" for="uploadFile">
+                                Select Images</label>
+                            <input class="form-control" type="file" name="uploadFile[]" id="uploadFile" accept="image/*"
+                                multiple data-bs-toggle="tooltip" title="Select Images" />
+                            <button class="btn btn-primary" name="uploadBtn" data-bs-toggle="tooltip" title="Upload">
+                                <i class="bi bi-upload"></i></button>
                         </fieldset>
                         <?php include ('modules/dbUpload.php'); ?>
                     </form>
@@ -197,15 +198,16 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         <li class="nav-item"></li>
                     </ul>
                     <div class="!btn-group d-flex <?php echo $isAdmin; ?>">
-                        <button class="btn btn-outline-primary text-nowrap" data-bs-toggle="button" id="chkboxToggle">
+                        <button class="btn btn-sm btn-outline-primary text-nowrap" data-bs-toggle="button"
+                            id="chkboxToggle">
                             <span data-bs-toggle="tooltip"
                                 title="Multi-Select Toggle (Click to Show/Hide More Options)">
                                 <i class="bi bi-ui-checks-grid"></i> <i class="↔ bi bi-box-arrow-right"></i>
                             </span></button>
-                        <button class="btn btn-outline-success mx-1" id="selectAll" data-bs-toggle="tooltip"
+                        <button class="btn btn-sm btn-outline-success mx-1" id="selectAll" data-bs-toggle="tooltip"
                             title="(De)Select All" style="display: none;">
                             <i class="bi bi-check-square-fill"></i></button>
-                        <button class="btn btn-outline-danger text-nowrap" data-bs-toggle="modal"
+                        <button class="btn btn-sm btn-outline-danger text-nowrap" data-bs-toggle="modal"
                             data-bs-target="#delModal" id="deleteBtnLink" style="display: none;">
                             <span data-bs-toggle="tooltip" title="Delete Selected">
                                 <i class="bi bi-trash-fill"></i><i class="bi bi-ui-checks"></i>
@@ -214,12 +216,28 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
                         <li class="nav-item"></li>
                     </ul>
-                    <form class="input-group w-auto" role="search">
-                        <input class="form-control" type="search" id="searchBox" placeholder="Ctrl/⌘ + K"
+                    <form class="input-group input-group-sm w-auto" role="search">
+                        <input class="form-control" type="search" id="imgSearch" placeholder="Ctrl/⌘ + K"
                             aria-label="Search" />
-                        <label class="input-group-text" data-bs-toggle="tooltip"
-                            title="Instantly Search Images on Page">
-                            <i class="bi bi-search"></i></label>
+                        <label class="input-group-text" data-bs-toggle="tooltip" title="Search Displayed Images">
+                            <!-- <i class="bi bi-search"></i> -->
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="1.35rem" viewBox="0 0 27 27" height="1.35rem" preserveAspectRatio="xMidYMid meet"
+                                style="margin-top: -.15rem;" version="1.0">
+                                <defs>
+                                    <clipPath id="id1">
+                                        <path
+                                            d="M 3.386719 2.902344 L 26.613281 2.902344 L 26.613281 26.121094 L 3.386719 26.121094 Z M 3.386719 2.902344 "
+                                            clip-rule="nonzero" />
+                                    </clipPath>
+                                </defs>
+                                <g clip-path="url(#id1)">
+                                    <path fill="currentColor"
+                                        d="M 19.0625 11.03125 C 17.460938 11.03125 16.160156 9.726562 16.160156 8.125 C 16.160156 6.523438 17.460938 5.222656 19.0625 5.222656 C 20.664062 5.222656 21.964844 6.523438 21.964844 8.125 C 21.964844 9.726562 20.664062 11.03125 19.0625 11.03125 Z M 23.476562 10.902344 C 24.03125 10.007812 24.347656 8.960938 24.277344 7.8125 C 24.125 5.316406 22.140625 3.203125 19.667969 2.9375 C 16.507812 2.585938 13.835938 5.039062 13.835938 8.125 C 13.835938 11.015625 16.171875 13.351562 19.050781 13.351562 C 20.074219 13.351562 21.023438 13.046875 21.824219 12.539062 L 24.625 15.335938 C 25.078125 15.789062 25.820312 15.789062 26.273438 15.335938 C 26.726562 14.882812 26.726562 14.140625 26.273438 13.6875 Z M 19.0625 21.480469 L 8.632812 21.480469 C 8.148438 21.480469 7.878906 20.921875 8.183594 20.539062 L 10.203125 17.949219 C 10.433594 17.660156 10.875 17.644531 11.109375 17.9375 L 12.917969 20.121094 L 15.648438 16.613281 C 15.878906 16.3125 16.34375 16.3125 16.566406 16.625 L 19.527344 20.5625 C 19.816406 20.933594 19.539062 21.480469 19.0625 21.480469 Z M 21.964844 17.996094 L 21.964844 22.640625 C 21.964844 23.28125 21.445312 23.800781 20.804688 23.800781 L 6.871094 23.800781 C 6.234375 23.800781 5.707031 23.28125 5.707031 22.640625 L 5.707031 8.707031 C 5.707031 8.070312 6.234375 7.542969 6.871094 7.542969 L 10.378906 7.542969 C 11.015625 7.542969 11.539062 7.023438 11.539062 6.382812 C 11.539062 5.746094 11.015625 5.222656 10.378906 5.222656 L 5.707031 5.222656 C 4.433594 5.222656 3.386719 6.269531 3.386719 7.542969 L 3.386719 23.800781 C 3.386719 25.078125 4.433594 26.121094 5.707031 26.121094 L 21.964844 26.121094 C 23.242188 26.121094 24.285156 25.078125 24.285156 23.800781 L 24.285156 17.996094 C 24.285156 17.359375 23.765625 16.832031 23.125 16.832031 C 22.488281 16.832031 21.964844 17.359375 21.964844 17.996094 "
+                                        fill-opacity="1" fill-rule="nonzero" />
+                                </g>
+                            </svg>
+                        </label>
                         <!-- <button class="btn btn-outline-info" title="Search" disabled><i class="bi bi-search"></i></button> -->
                     </form>
                 </div>
@@ -244,8 +262,8 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
             <li class="page-item" title="Last"><a class="page-link" href="#"><i class="bi bi-chevron-bar-right"></i></a>
             </li>
         </ul> -->
-    <p class="alert alert-info p-2 position-fixed bottom-0 start-0 mb-1 ms-1">
-        Showing <span id="imgCount">x</span> Image(s)</p>
+    <p class="alert alert-info p-1 position-fixed bottom-0 start-0 mb-1 ms-1">
+        Showing <span id="imgCount">x</span> <span id="imgCntTxt">y</span></p>
     <!-- </nav> -->
     <script src="JS/script.js"></script>
 </body>

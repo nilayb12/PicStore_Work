@@ -1,5 +1,5 @@
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 
 var figs = document.getElementsByTagName('figure');
 for (const fig of figs) {
@@ -27,11 +27,22 @@ if (window.history.replaceState) {
     window.history.replaceState(null, null, window.location.href);
 }
 
+$(function () {
+    $('[name="SAPOpt"]').click(function () {
+        var This = $(this);
+        var opt = This.prop('id');
+        sessionStorage.setItem('opt', opt);
+    });
+    var optVal = sessionStorage.getItem('opt');
+    if (optVal != null) {
+        $('[id="' + optVal + '"]').click();
+    }
+});
+
 $('#SAPSelectionType li').click(function () {
     $('#uploadGrp, #showImg').attr('disabled', true);
     $('#showImg').removeClass('d-none');
-    $('#circleSelect').val('default').selectpicker('refresh');
-    $('#citySelect, #sectorSelect').html('').selectpicker('refresh');
+    $('#circleSelect, #citySelect, #sectorSelect').selectpicker('val', '');
     $('#searchSAP input').val('');
 });
 
@@ -79,6 +90,52 @@ $('#sectorSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
     });
 });
 
+$(async function () {
+    $('#circleSelect').on('changed.bs.select', function () {
+        var This = $(this);
+        var sel = This.val();
+        sessionStorage.setItem('circleSel', sel);
+    });
+    var selVal = sessionStorage.getItem('circleSel');
+    if (selVal != null) {
+        $('#circleSelect').selectpicker('val', selVal);
+    }
+    await new Promise(res => setTimeout(res, 500));
+
+    $('#citySelect').on('changed.bs.select', function () {
+        var This = $(this);
+        var sel = This.val();
+        sessionStorage.setItem('citySel', sel);
+    });
+    var selVal = sessionStorage.getItem('citySel');
+    if (selVal != null) {
+        $('#citySelect').selectpicker('val', selVal);
+    }
+    await new Promise(res => setTimeout(res, 250));
+
+    $('#sectorSelect').on('changed.bs.select', function () {
+        var This = $(this);
+        var sel = This.val();
+        sessionStorage.setItem('sectorSel', sel);
+    });
+    var selVal = sessionStorage.getItem('sectorSel');
+    if (selVal != null) {
+        $('#sectorSelect').selectpicker('val', selVal);
+    }
+});
+
+$(function () {
+    $('#searchSAP fieldset input').on('keyup click input change', function () {
+        var This = $(this);
+        var sap = This.val();
+        sessionStorage.setItem('sap', sap);
+    });
+    var sapVal = sessionStorage.getItem('sap');
+    if (sapVal != null) {
+        $('#searchSAP fieldset input').val(sapVal);
+    }
+});
+
 $('#showImg').click(function () {
     $('#pathVal, #pathVal1').attr('value', $('#pathVal, #pathVal1').attr('value').substr(2, 2) + '/' + $('#pathVal, #pathVal1').attr('value').substr(5, 4) + '/' + $('#pathVal, #pathVal1').attr('value'));
     $('#imgForm').submit();
@@ -124,14 +181,14 @@ $('#delConfirm').click(function () {
 window.addEventListener("keydown", (e) => {
     if ((e.ctrlKey || e.metaKey) && e.code === 'KeyK') {
         e.preventDefault();
-        document.getElementById('searchBox').focus()
+        document.getElementById('imgSearch').focus()
     }
 })
 
 var imgDetails = document.querySelectorAll('.card');
 var cnt = chk.length;
-['keyup', 'click', 'input'].forEach(function (e) {
-    document.getElementById('searchBox').addEventListener(e, (e) => {
+['keyup', 'click', 'input', 'change'].forEach(function (e) {
+    document.getElementById('imgSearch').addEventListener(e, (e) => {
         cnt = 0;
         imgDetails.forEach((imgDetail) => {
             if (!imgDetail.innerHTML.toLowerCase().includes(e.target.value.toLowerCase())) {
@@ -143,12 +200,14 @@ var cnt = chk.length;
         });
         document.getElementById('imgCount').innerText = cnt;
         $('#imgCount').text() == '0' ? $('#imgCount').addClass('text-danger') : $('#imgCount').removeClass('text-danger');
+        $('#imgCount').text() == '1' ? $('#imgCntTxt').text('Image') : $('#imgCntTxt').text('Images');
     });
 });
 document.getElementById('imgCount').innerText = cnt;
 $('#imgCount').text() == '0' ? $('#imgCount').addClass('text-danger') : $('#imgCount').removeClass('text-danger');
+$('#imgCount').text() == '1' ? $('#imgCntTxt').text('Image') : $('#imgCntTxt').text('Images');
 
-$('#searchSAP input').on("keyup input", function () {
+$('#searchSAP input').on("keyup click input change", function () {
     var searchSAPVal = $(this).val();
     if (searchSAPVal.length >= $(this).attr('minlength')) {
         // $.post("modules/dbSearchSAP.php", { term: inputVal }).done(function (data) {
@@ -157,7 +216,7 @@ $('#searchSAP input').on("keyup input", function () {
         $.ajax({
             type: "POST",
             url: "modules/dbSearchSAP.php",
-            data: { term: $('#searchSAP code').text() + searchSAPVal },
+            data: { term: searchSAPVal },
             success: function (data) {
                 $('#searchRes').html(data);
                 $('#searchRes').addClass('show');
@@ -169,8 +228,8 @@ $('#searchSAP input').on("keyup input", function () {
     }
 });
 $(document).on("click", "#searchRes li", function () {
-    var SAPID = $('#searchSAP code').text() + $(this).text();
-    $('#searchSAP input').val($(this).text());
+    var SAPID = $(this).text();
+    $('#searchSAP input').val(SAPID);
     $('#searchRes').empty().removeClass('show');
     $('#uploadGrp, #showImg').removeAttr('disabled');
     $('#pathVal, #pathVal1').attr('value', SAPID);

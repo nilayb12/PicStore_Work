@@ -7,7 +7,7 @@ if (isset($_POST['uploadBtn'])) {
 
         $fileName = $_FILES['uploadFile']['name'][$i];
         $tmpName = $_FILES['uploadFile']['tmp_name'][$i];
-        $folderPath = $_POST['pathVal'];
+        $folderPath = substr($_POST['pathVal'], 2, 2) . '/' . substr($_POST['pathVal'], 5, 4) . '/' . substr($_POST['pathVal'], 0);
         $filePath = 'images/' . $folderPath . '/' . $fileName;
 
         if (!empty($fileName)) {
