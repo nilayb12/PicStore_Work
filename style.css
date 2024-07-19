@@ -5,6 +5,7 @@
 
 ::-webkit-scrollbar {
     width: 7.5px;
+    height: 7.5px;
 }
 
 ::-webkit-scrollbar-button {
@@ -22,20 +23,47 @@
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23BF40BF" class="bi bi-caret-up-fill" viewBox="0 0 16 16"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" /></svg>');
 }
 
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-button:horizontal:increment {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23BF40BF" class="bi bi-caret-right-fill" viewBox="0 0 16 16"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/></svg>');
+}
+
+::-webkit-scrollbar-button:horizontal:decrement {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23BF40BF" class="bi bi-caret-left-fill" viewBox="0 0 16 16"><path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/></svg>');
+}
+
+::-webkit-scrollbar-thumb:vertical {
     border-radius: 7.5px;
     background-image: -webkit-gradient(linear,
-            left bottom,
-            left top,
+            center bottom,
+            center top,
             color-stop(0.33, #5f2e59),
             color-stop(0.67, #734674),
             color-stop(1, #925784));
 }
 
-::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:vertical:hover {
     background-image: -webkit-gradient(linear,
-            left bottom,
-            left top,
+            center bottom,
+            center top,
+            color-stop(0.33, #734674),
+            color-stop(0.67, #925784),
+            color-stop(1, #e2bfd8));
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+    border-radius: 7.5px;
+    background-image: -webkit-gradient(linear,
+            right center,
+            left center,
+            color-stop(0.33, #5f2e59),
+            color-stop(0.67, #734674),
+            color-stop(1, #925784));
+}
+
+::-webkit-scrollbar-thumb:horizontal:hover {
+    background-image: -webkit-gradient(linear,
+            right center,
+            left center,
             color-stop(0.33, #734674),
             color-stop(0.67, #925784),
             color-stop(1, #e2bfd8));

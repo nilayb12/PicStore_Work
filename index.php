@@ -78,7 +78,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
     include ('modules/colorToggle.php'); ?>
 
     <div class="sticky-top bg-secondary-subtle border-bottom border-secondary">
-        <nav class="navbar navbar-expand-md z-1">
+        <nav class="navbar navbar-expand-md py-1 z-1">
             <div class="container-fluid">
                 <a class="navbar-brand" href="">
                     <img id="brand-logo" src="Reliance_Jio_Logo.svg"> Image DB
@@ -87,7 +87,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse align-items-start" id="navbarSupportedContent">
                     <!-- <div class="dropdown ms-4">
                         <button class="btn btn-primary text-nowrap" id="SAPSelection" data-bs-toggle="dropdown">
                             Select SAP/Site ID <i class="bi bi-caret-down-fill"></i>
@@ -104,10 +104,20 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     <span class="vr ms-md-4 me-md-2"></span>
                     <ul class="list-group text-nowrap" id="SAPSelectionType">
                         <li class="list-group-item">
-                            <input class="form-check-input" type="radio" name="SAPOpt" id="SAPOpt1"
-                                onclick="$('#circleSelect, #citySelect, #sectorSelect').selectpicker('show'); $('#searchSAP').addClass('d-none');" />
+                            <input class="form-check-input" type="radio" name="SAPOpt" id="SAPOpt1" />
                             <label class="stretched-link" for="SAPOpt1">
                                 <small>Select SAPID from Dropdown</small></label>
+                            <script type="text/javascript">
+                                var runOnce;
+                                $('#SAPOpt1').click(function () {
+                                    $('#circleSelect, #citySelect, #sectorSelect').selectpicker('show');
+                                    $('#searchSAP').addClass('d-none');
+                                    if ($('#circleSelect').val() != '<?php echo $_SESSION['circle']; ?>' && !runOnce) {
+                                        runOnce = true;
+                                        $('#circleSelect').selectpicker('val', '<?php echo $_SESSION['circle']; ?>');
+                                    }
+                                });
+                            </script>
                         </li>
                         <li class="list-group-item">
                             <input class="form-check-input" type="radio" name="SAPOpt" id="SAPOpt2"
@@ -167,7 +177,8 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                             <i class="bi bi-person-fill"></i> <?php echo $_SESSION['username']; ?>
                             <i class="bi bi-caret-down-fill ms-2"></i></button>
                         <ul class="dropdown-menu dropdown-menu-md-end">
-                            <li><a class="btn btn-outline-danger dropdown-item" id="logout" href="Login/logout.php">
+                            <li><a class="btn btn-outline-danger dropdown-item" id="logout" href="Login/logout.php"
+                                    onclick="sessionStorage.clear();">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                         <path fill="currentColor"
@@ -179,7 +190,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                 </div>
             </div>
         </nav>
-        <nav class="navbar navbar-expand-md z-0">
+        <nav class="navbar navbar-expand-md py-1 z-0">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <form class="!w-auto" id="uploadForm" method="post" action="" enctype="multipart/form-data">
@@ -189,7 +200,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                                 Select Images</label>
                             <input class="form-control" type="file" name="uploadFile[]" id="uploadFile" accept="image/*"
                                 multiple data-bs-toggle="tooltip" title="Select Images" />
-                            <button class="btn btn-primary" name="uploadBtn" data-bs-toggle="tooltip" title="Upload">
+                            <button class="btn btn-info" name="uploadBtn" data-bs-toggle="tooltip" title="Upload">
                                 <i class="bi bi-upload"></i></button>
                         </fieldset>
                         <?php include ('modules/dbUpload.php'); ?>
@@ -198,20 +209,19 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         <li class="nav-item"></li>
                     </ul>
                     <div class="!btn-group d-flex <?php echo $isAdmin; ?>">
-                        <button class="btn btn-sm btn-outline-primary text-nowrap" data-bs-toggle="button"
-                            id="chkboxToggle">
-                            <span data-bs-toggle="tooltip"
-                                title="Multi-Select Toggle (Click to Show/Hide More Options)">
+                        <span data-bs-toggle="tooltip" title="Multi-Select Toggle (Click to Show/Hide More Options)">
+                            <button class="btn btn-sm btn-outline-primary text-nowrap" data-bs-toggle="button"
+                                id="chkboxToggle">
                                 <i class="bi bi-ui-checks-grid"></i> <i class="↔ bi bi-box-arrow-right"></i>
-                            </span></button>
+                            </button></span>
                         <button class="btn btn-sm btn-outline-success mx-1" id="selectAll" data-bs-toggle="tooltip"
                             title="(De)Select All" style="display: none;">
                             <i class="bi bi-check-square-fill"></i></button>
-                        <button class="btn btn-sm btn-outline-danger text-nowrap" data-bs-toggle="modal"
-                            data-bs-target="#delModal" id="deleteBtnLink" style="display: none;">
-                            <span data-bs-toggle="tooltip" title="Delete Selected">
+                        <span data-bs-toggle="tooltip" title="Delete Selected">
+                            <button class="btn btn-sm btn-outline-danger text-nowrap" data-bs-toggle="modal"
+                                data-bs-target="#delModal" id="deleteBtnLink" style="display: none;">
                                 <i class="bi bi-trash-fill"></i><i class="bi bi-ui-checks"></i>
-                            </span></button>
+                            </button></span>
                     </div>
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
                         <li class="nav-item"></li>

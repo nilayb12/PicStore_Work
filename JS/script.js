@@ -1,5 +1,5 @@
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl, { trigger: 'hover' }));
 
 var figs = document.getElementsByTagName('figure');
 for (const fig of figs) {
@@ -42,7 +42,8 @@ $(function () {
 $('#SAPSelectionType li').click(function () {
     $('#uploadGrp, #showImg').attr('disabled', true);
     $('#showImg').removeClass('d-none');
-    $('#circleSelect, #citySelect, #sectorSelect').selectpicker('val', '');
+    // $('#circleSelect, #citySelect, #sectorSelect').selectpicker('val', '');
+    $('#sectorSelect').selectpicker('val', '');
     $('#searchSAP input').val('');
 });
 
@@ -90,7 +91,7 @@ $('#sectorSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
     });
 });
 
-$(async function () {
+$(window).on('load', async function () {
     $('#circleSelect').on('changed.bs.select', function () {
         var This = $(this);
         var sel = This.val();
@@ -100,7 +101,7 @@ $(async function () {
     if (selVal != null) {
         $('#circleSelect').selectpicker('val', selVal);
     }
-    await new Promise(res => setTimeout(res, 500));
+    await new Promise(res => setTimeout(res, 250));
 
     $('#citySelect').on('changed.bs.select', function () {
         var This = $(this);
@@ -111,7 +112,7 @@ $(async function () {
     if (selVal != null) {
         $('#citySelect').selectpicker('val', selVal);
     }
-    await new Promise(res => setTimeout(res, 250));
+    await new Promise(res => setTimeout(res, 1200));
 
     $('#sectorSelect').on('changed.bs.select', function () {
         var This = $(this);
@@ -227,7 +228,7 @@ $('#searchSAP input').on("keyup click input change", function () {
         $('#searchRes').removeClass('show');
     }
 });
-$(document).on("click", "#searchRes li", function () {
+$(document).on('click', '#searchRes li', function () {
     var SAPID = $(this).text();
     $('#searchSAP input').val(SAPID);
     $('#searchRes').empty().removeClass('show');

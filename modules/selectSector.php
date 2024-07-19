@@ -8,7 +8,7 @@ $city = @$_POST['city']; ?>
     <option data-divider="true" disabled></option>
     <option data-subtext="<Select SAP ID>" selected></option>
     <?php
-    $query = "WITH temp AS (SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS City, SAP_ID FROM 5g_data_30k) SELECT DISTINCT SAP_ID FROM temp WHERE City = ('$city') ORDER BY SAP_ID ASC";
+    $query = "WITH temp AS (SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS City, SAP_ID FROM 5g_data) SELECT DISTINCT SAP_ID FROM temp WHERE City = ('$city') ORDER BY SAP_ID ASC";
     $result = mysqli_query($db, $query);
 
     while ($data = mysqli_fetch_assoc($result)) {

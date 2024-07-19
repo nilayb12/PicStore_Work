@@ -98,13 +98,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <img class="mb-4" src="../Reliance_Jio_Logo.svg" alt="" width="64" height="64">
-            <h1 class="h3 mb-3 fw-normal">Sign In</h1>
+            <h1 class="h3 mb-3 fw-normal"><i class="bi bi-shield-lock-fill"></i> Sign In</h1>
 
             <div class="form-floating mb-1">
                 <input type="text" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"
                     name="username" id="floatingInput" value="<?php echo $username; ?>"
                     placeholder="firstname.lastname">
-                <label for="floatingInput">User ID</label>
+                <label for="floatingInput"><i class="bi bi-person-fill"></i> User ID</label>
                 <span class="invalid-feedback">
                     <?php echo $username_err; ?>
                 </span>
@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-floating">
                 <input type="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>"
                     name="password" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
+                <label for="floatingPassword"><i class="bi bi-key-fill"></i> Password</label>
                 <span class="invalid-feedback">
                     <?php echo $password_err; ?>
                 </span>
