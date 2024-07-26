@@ -91,28 +91,36 @@ $('#sectorSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
     });
 });
 
-$(window).on('load', async function () {
+window.onload = async function () {
     $('#circleSelect').on('changed.bs.select', function () {
         var This = $(this);
         var sel = This.val();
         sessionStorage.setItem('circleSel', sel);
+        $('#spinner div').removeClass('d-none');
+        setTimeout(() => {
+            $('#spinner div').addClass('d-none');
+        }, 500);
     });
     var selVal = sessionStorage.getItem('circleSel');
     if (selVal != null) {
         $('#circleSelect').selectpicker('val', selVal);
     }
-    await new Promise(res => setTimeout(res, 250));
+    await new Promise(res => setTimeout(res, 500));
 
     $('#citySelect').on('changed.bs.select', function () {
         var This = $(this);
         var sel = This.val();
         sessionStorage.setItem('citySel', sel);
+        $('#spinner div').removeClass('d-none');
+        setTimeout(() => {
+            $('#spinner div').addClass('d-none');
+        }, 1500);
     });
     var selVal = sessionStorage.getItem('citySel');
     if (selVal != null) {
         $('#citySelect').selectpicker('val', selVal);
     }
-    await new Promise(res => setTimeout(res, 1200));
+    await new Promise(res => setTimeout(res, 1500));
 
     $('#sectorSelect').on('changed.bs.select', function () {
         var This = $(this);
@@ -123,6 +131,34 @@ $(window).on('load', async function () {
     if (selVal != null) {
         $('#sectorSelect').selectpicker('val', selVal);
     }
+}
+
+$('#searchSAP input').on("keyup click input change", function () {
+    var searchSAPVal = $(this).val();
+    if (searchSAPVal.length >= $(this).attr('minlength')) {
+        // $.post("modules/dbSearchSAP.php", { term: inputVal }).done(function (data) {
+        //     $('#searchRes').html(data);
+        // });
+        $.ajax({
+            type: "POST",
+            url: "modules/dbSearchSAP.php",
+            data: { term: searchSAPVal },
+            success: function (data) {
+                $('#searchRes').html(data);
+                $('#searchRes').addClass('show');
+            }
+        });
+    } else {
+        $('#searchRes').empty();
+        $('#searchRes').removeClass('show');
+    }
+});
+$(document).on('click', '#searchRes li', function () {
+    var SAPID = $(this).text();
+    $('#searchSAP input').val(SAPID);
+    $('#searchRes').empty().removeClass('show');
+    $('#uploadGrp, #showImg').removeAttr('disabled');
+    $('#pathVal, #pathVal1').attr('value', SAPID);
 });
 
 $(function () {
@@ -208,30 +244,15 @@ document.getElementById('imgCount').innerText = cnt;
 $('#imgCount').text() == '0' ? $('#imgCount').addClass('text-danger') : $('#imgCount').removeClass('text-danger');
 $('#imgCount').text() == '1' ? $('#imgCntTxt').text('Image') : $('#imgCntTxt').text('Images');
 
-$('#searchSAP input').on("keyup click input change", function () {
-    var searchSAPVal = $(this).val();
-    if (searchSAPVal.length >= $(this).attr('minlength')) {
-        // $.post("modules/dbSearchSAP.php", { term: inputVal }).done(function (data) {
-        //     $('#searchRes').html(data);
-        // });
-        $.ajax({
-            type: "POST",
-            url: "modules/dbSearchSAP.php",
-            data: { term: searchSAPVal },
-            success: function (data) {
-                $('#searchRes').html(data);
-                $('#searchRes').addClass('show');
-            }
-        });
+window.onscroll = function () {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        $('#gotoTop').removeClass('d-none');
     } else {
-        $('#searchRes').empty();
-        $('#searchRes').removeClass('show');
+        $('#gotoTop').addClass('d-none');
     }
-});
-$(document).on('click', '#searchRes li', function () {
-    var SAPID = $(this).text();
-    $('#searchSAP input').val(SAPID);
-    $('#searchRes').empty().removeClass('show');
-    $('#uploadGrp, #showImg').removeAttr('disabled');
-    $('#pathVal, #pathVal1').attr('value', SAPID);
+};
+
+$('#gotoTop').click(() => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 });

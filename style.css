@@ -162,7 +162,7 @@ input[type=file] {
 }
 
 #figBox {
-    margin: 2px;
+    margin: 4px 2px 0 2px;
 }
 
 #figImg {

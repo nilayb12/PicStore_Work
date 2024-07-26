@@ -149,6 +149,11 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     </select>
                     <?php include ('modules/selectCity.php');
                     include ('modules/selectSector.php') ?>
+                    <div class="py-1" id="spinner">
+                        <div class="spinner-border spinner-border-sm d-none" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
                     <ul class="navbar-nav mb-1 mb-lg-0">
                         <li class="nav-item"></li>
                     </ul>
@@ -274,6 +279,9 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
         </ul> -->
     <p class="alert alert-info p-1 position-fixed bottom-0 start-0 mb-1 ms-1">
         Showing <span id="imgCount">x</span> <span id="imgCntTxt">y</span></p>
+    <button class="btn btn-sm btn-info position-fixed bottom-0 end-0 mb-1 d-none" id="gotoTop" data-bs-toggle="tooltip"
+        title="Back to Top" style="margin-right: 4rem;">
+        <i class="bi bi-arrow-up"></i></button>
     <!-- </nav> -->
     <script src="JS/script.js"></script>
 </body>
