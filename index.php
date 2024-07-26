@@ -102,7 +102,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         </ul>
                     </div> -->
                     <span class="vr ms-md-4 me-md-2"></span>
-                    <ul class="list-group text-nowrap" id="SAPSelectionType">
+                    <ul class="list-group text-nowrap shadow" id="SAPSelectionType">
                         <li class="list-group-item">
                             <input class="form-check-input" type="radio" name="SAPOpt" id="SAPOpt1" />
                             <label class="stretched-link" for="SAPOpt1">
@@ -162,17 +162,20 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                             <!-- <code class="input-group-text">I-</code> -->
                             <input class="form-control" type="search" minlength="6" placeholder="I-Circle-City-Sector"
                                 aria-label="Search" />
-                            <label class="input-group-text" data-bs-toggle="tooltip" title="Search SAP/Site ID">
-                                <i class="bi bi-search"></i></label>
+                            <!-- <label class="input-group-text" data-bs-toggle="!tooltip" title="Search SAP/Site ID">
+                                <i class="bi bi-search"></i></label> -->
+                            <label class="input-group-text" data-bs-toggle="tooltip" data-bs-html="true"
+                                title="<small>Click on a Search Result to Show Images.</small>">
+                                <i class="bi bi-info-circle"></i></label>
                         </fieldset>
-                        <ul class="dropdown-menu overflow-auto" id="searchRes" style="max-height: 14rem;">
+                        <ul class="dropdown-menu overflow-auto shadow" id="searchRes" style="max-height: 14rem;">
                         </ul>
                         <!-- <!?php include ('modules/dbSearchSAP.php'); ?> -->
                     </form>
                     <ul class="navbar-nav mb-1 mb-lg-0 me-1">
                         <li class="nav-item"></li>
                     </ul>
-                    <button class="btn btn-sm btn-success text-nowrap d-none" id="showImg" disabled>
+                    <button class="btn btn-sm btn-success text-nowrap rounded-pill d-none" id="showImg" disabled>
                         <i class="bi bi-images"></i> Show</button>
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
                         <li class="nav-item"></li>
@@ -214,7 +217,8 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         <li class="nav-item"></li>
                     </ul>
                     <div class="!btn-group d-flex <?php echo $isAdmin; ?>">
-                        <span data-bs-toggle="tooltip" title="Multi-Select Toggle (Click to Show/Hide More Options)">
+                        <span data-bs-toggle="tooltip" data-bs-html="true"
+                            title="<small>Multi-Select Toggle (Click to Show/Hide More Options)</small>">
                             <button class="btn btn-sm btn-outline-primary text-nowrap" data-bs-toggle="button"
                                 id="chkboxToggle">
                                 <i class="bi bi-ui-checks-grid"></i> <i class="↔ bi bi-box-arrow-right"></i>
@@ -231,7 +235,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
                         <li class="nav-item"></li>
                     </ul>
-                    <form class="input-group input-group-sm w-auto" role="search">
+                    <form class="input-group input-group-sm w-auto shadow" role="search">
                         <input class="form-control" type="search" id="imgSearch" placeholder="Ctrl/⌘ + K"
                             aria-label="Search" />
                         <label class="input-group-text" data-bs-toggle="tooltip" title="Search Displayed Images">

@@ -41,13 +41,16 @@
             <div class="list-group">
                 <button
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center text-muted"
-                    type="button" onclick="$('#uploadGrp label').focus();">
+                    type="button" id="sug1" onclick="$('#uploadGrp label').focus();">
                     Uploading some Images<i class="bi bi-upload"></i>
                 </button>
+                <script type="text/javascript">
+                    <?php echo $_SESSION['isAdmin']; ?> != 1 ? $('#sug1').addClass('d-none') : $('#sug1').removeClass('d-none');
+                </script>
                 <button
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center text-muted"
                     type="button" onclick="$('#SAPOpt1, #SAPOpt2').focus();">
-                    Navigating to other SAP/Site IDs<i class="bi bi-ui-radios"></i>
+                    Checking other SAP/Site IDs<i class="bi bi-ui-radios"></i>
                 </button>
                 <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center text-muted"
                     href="">

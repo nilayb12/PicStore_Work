@@ -23,7 +23,7 @@
 </svg>
 
 <div class="dropdown position-fixed bottom-0 end-0 mb-1 me-1 bd-mode-toggle z-1">
-    <button class="btn btn-sm btn-bd-primary d-flex align-items-center" id="bd-theme" aria-expanded="false"
+    <button class="btn btn-sm btn-bd-primary d-flex align-items-center rounded-pill" id="bd-theme" aria-expanded="false"
         data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
         <span class="stretched-link" data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Theme"></span>
         <svg class="bi theme-icon-active" width="1em" height="1em">
