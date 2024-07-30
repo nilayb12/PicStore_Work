@@ -144,15 +144,19 @@ form {
     align-items: center;
 }
 
-#uploadForm fieldset {
-    margin-right: -3rem;
+#uploadGrp {
+    /* margin-right: -3rem; */
 }
 
-input[type=file] {
+input {
 
-    &::file-selector-button {
+    &[type=file]::file-selector-button {
         /* background-color: var(--bs-primary-bg-subtle); */
         display: none;
+    }
+
+    &::placeholder {
+        font-size: small;
     }
 }
 
@@ -178,4 +182,8 @@ input[type=file] {
     font-size: .875em;
     color: var(--bs-secondary-color);
     height: 100%;
+}
+
+#navHead {
+    justify-content: unset;
 }

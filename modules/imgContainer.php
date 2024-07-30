@@ -41,7 +41,7 @@
             <div class="list-group">
                 <button
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center text-muted"
-                    type="button" id="sug1" onclick="$('#uploadGrp label').focus();">
+                    type="button" id="sug1" onclick="$('#uploadGrp label').click();">
                     Uploading some Images<i class="bi bi-upload"></i>
                 </button>
                 <script type="text/javascript">
@@ -49,8 +49,19 @@
                 </script>
                 <button
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center text-muted"
-                    type="button" onclick="$('#SAPOpt1, #SAPOpt2').focus();">
+                    id="sug2" type="button">
                     Checking other SAP/Site IDs<i class="bi bi-ui-radios"></i>
+                    <script type="text/javascript">
+                        var sapOpt = $('input[type="radio"][name="SAPOpt"]')
+                        $('#sug2').click(function () {
+                            var checked = sapOpt.filter(':checked');
+                            var next = sapOpt.eq(sapOpt.index(checked) + 1);
+                            if (!next.length) {
+                                next = sapOpt.first();
+                            }
+                            next.click();
+                        });
+                    </script>
                 </button>
                 <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center text-muted"
                     href="">

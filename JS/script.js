@@ -96,9 +96,9 @@ window.onload = async function () {
         var This = $(this);
         var sel = This.val();
         sessionStorage.setItem('circleSel', sel);
-        $('#spinner div').removeClass('d-none');
+        $('#spinner').removeClass('d-none');
         setTimeout(() => {
-            $('#spinner div').addClass('d-none');
+            $('#spinner').addClass('d-none');
         }, 500);
     });
     var selVal = sessionStorage.getItem('circleSel');
@@ -111,9 +111,9 @@ window.onload = async function () {
         var This = $(this);
         var sel = This.val();
         sessionStorage.setItem('citySel', sel);
-        $('#spinner div').removeClass('d-none');
+        $('#spinner').removeClass('d-none');
         setTimeout(() => {
-            $('#spinner div').addClass('d-none');
+            $('#spinner').addClass('d-none');
         }, 1500);
     });
     var selVal = sessionStorage.getItem('citySel');
@@ -133,7 +133,7 @@ window.onload = async function () {
     }
 }
 
-$('#searchSAP input').on("keyup click input change", function () {
+$('#searchSAP').on("keyup click input", function () {
     var searchSAPVal = $(this).val();
     if (searchSAPVal.length >= $(this).attr('minlength')) {
         // $.post("modules/dbSearchSAP.php", { term: inputVal }).done(function (data) {
@@ -155,21 +155,21 @@ $('#searchSAP input').on("keyup click input change", function () {
 });
 $(document).on('click', '#searchRes li', function () {
     var SAPID = $(this).text();
-    $('#searchSAP input').val(SAPID);
+    $('#searchSAP').val(SAPID);
     $('#searchRes').empty().removeClass('show');
     $('#uploadGrp, #showImg').removeAttr('disabled');
     $('#pathVal, #pathVal1').attr('value', SAPID);
 });
 
 $(function () {
-    $('#searchSAP fieldset input').on('keyup click input change', function () {
+    $(document).on('click', '#searchRes li', function () {
         var This = $(this);
-        var sap = This.val();
+        var sap = This.text();
         sessionStorage.setItem('sap', sap);
     });
     var sapVal = sessionStorage.getItem('sap');
     if (sapVal != null) {
-        $('#searchSAP fieldset input').val(sapVal);
+        $('#searchSAP').val(sapVal);
     }
 });
 

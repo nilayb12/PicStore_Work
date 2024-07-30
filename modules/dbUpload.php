@@ -1,5 +1,4 @@
-<?php
-include_once ('dbConfig.php');
+<?php include_once ('dbConfig.php');
 
 if (isset($_POST['uploadBtn'])) {
     $errDupl = $errSize = [];
@@ -7,8 +6,8 @@ if (isset($_POST['uploadBtn'])) {
 
         $fileName = $_FILES['uploadFile']['name'][$i];
         $tmpName = $_FILES['uploadFile']['tmp_name'][$i];
-        $a = $_SESSION['circle'] == 'NHQ' ? 1 : 0;
-        $folderPath = substr($_POST['pathVal'], 2 + $a, 2) . '/' . substr($_POST['pathVal'], 5 + $a, 4) . '/' . substr($_POST['pathVal'], 0);
+        // $a = $_SESSION['circle'] == 'NHQ' ? 1 : 0;
+        $folderPath = substr($_POST['pathVal'], 2, 2) . '/' . substr($_POST['pathVal'], 5, 4) . '/' . substr($_POST['pathVal'], 0);
         $filePath = 'images/' . $folderPath . '/' . $fileName;
 
         if (!empty($fileName)) {

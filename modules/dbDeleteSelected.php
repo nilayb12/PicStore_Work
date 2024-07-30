@@ -1,5 +1,4 @@
-<?php
-include_once ('dbConfig.php');
+<?php include_once ('dbConfig.php');
 
 if (isset($_POST['deleteBtn'])) {
     if (!empty($_POST['imgSelect'])) {
