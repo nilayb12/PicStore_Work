@@ -4,7 +4,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     header("location: ../");
     exit;
 }
-include_once ('../modules/dbConfig.php');
+include_once('../modules/dbConfig.php');
 
 $username = $password = "";
 $username_err = $password_err = $login_err = "";
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script> -->
     <script src="../Bootstrap/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
-    <?php include ('../modules/colorToggle.php'); ?>
+    <?php include('../modules/colorToggle.php'); ?>
 
     <main class="form-signin m-auto">
 
@@ -100,22 +100,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <img class="mb-4" src="../Reliance_Jio_Logo.svg" alt="" width="64" height="64">
             <h1 class="h3 mb-3 fw-normal"><i class="bi bi-shield-lock-fill"></i> Sign In</h1>
 
-            <div class="form-floating mb-1">
-                <input type="text" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"
-                    name="username" id="floatingInput" value="<?php echo $username; ?>"
-                    placeholder="firstname.lastname">
-                <label for="floatingInput"><i class="bi bi-person-fill"></i> User ID</label>
-                <span class="invalid-feedback">
-                    <?php echo $username_err; ?>
-                </span>
+            <div class="input-group mb-1">
+                <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                <div class="form-floating">
+                    <input type="text" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"
+                        name="username" id="floatingInput" value="<?php echo $username; ?>"
+                        placeholder="firstname.lastname">
+                    <label for="floatingInput">User ID</label>
+                    <span class="invalid-feedback">
+                        <?php echo $username_err; ?>
+                    </span>
+                </div>
             </div>
-            <div class="form-floating">
-                <input type="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>"
-                    name="password" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword"><i class="bi bi-key-fill"></i> Password</label>
-                <span class="invalid-feedback">
-                    <?php echo $password_err; ?>
-                </span>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+                <div class="form-floating">
+                    <input type="password"
+                        class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" name="password"
+                        id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                    <span class="invalid-feedback">
+                        <?php echo $password_err; ?>
+                    </span>
+                </div>
             </div>
             <!-- <div class="form-check text-start my-3">
                 <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">

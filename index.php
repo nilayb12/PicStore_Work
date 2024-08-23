@@ -1,5 +1,5 @@
 <?php session_start();
-include_once ('modules/dbConfig.php');
+include_once('modules/dbConfig.php');
 
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: Login/");
@@ -74,30 +74,33 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <script src="ViewerJS/viewer.min.js"></script>
     <script src="JS/colorToggle.js"></script>
-    <?php include ('modules/confirmModal.php');
-    include ('modules/colorToggle.php'); ?>
+    <?php include('modules/confirmModal.php');
+    include('modules/colorToggle.php'); ?>
 
     <div class="sticky-top bg-secondary-subtle border-bottom border-secondary">
         <nav class="navbar navbar-expand-md py-1 z-2">
             <div class="container-fluid" id="navHead">
-                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+                <button class="navbar-toggler me-sm-3 me-md-0" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <ul class="navbar-nav mb-1 mb-lg-0 me-auto">
-                    <li class="nav-item"></li>
+                <ul class="navbar-nav flex-row mb-1 mb-lg-0 me-auto">
+                    <li class="nav-item me-sm-3 me-md-2">
+                        <a class="nav-link" href="">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="modal" data-bs-target="#aboutModal">About</button>
+                    </li>
                 </ul>
                 <a class="navbar-brand" href="">
-                    <img id="brand-logo" src="Reliance_Jio_Logo.svg"> Image DB
+                    <img id="brand-logo" src="Reliance_Jio_Logo.svg"> SAPID Image Hosting
                 </a>
                 <ul class="navbar-nav mb-1 mb-lg-0 me-auto">
                     <li class="nav-item"></li>
                 </ul>
                 <div class="dropdown">
-                    <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
-                        <li class="nav-item"></li>
-                    </ul>
-                    <button class="btn btn-sm btn-secondary text-nowrap" data-bs-toggle="dropdown">
+                    <button class="btn btn-sm btn-secondary text-nowrap rounded-pill" data-bs-toggle="dropdown">
                         <i class="bi bi-person-fill"></i> <?php echo $_SESSION['username']; ?>
                         <i class="bi bi-caret-down-fill ms-2"></i></button>
                     <ul class="dropdown-menu dropdown-menu-md-end">
@@ -141,7 +144,8 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                                 $('#SAPOpt1').click(function () {
                                     $('#circleSelect, #citySelect, #sectorSelect').selectpicker('show');
                                     $('#searchSAPForm').addClass('d-none');
-                                    $('#showImg').addClass('align-self-start').removeClass('align-self-end');
+                                    $('#showGrp').addClass('align-self-start').removeClass('align-self-end');
+                                    $('.bi-chevron-right').removeClass('d-none');
                                     if ('<?php echo $_SESSION['circle']; ?>' != 'NHQ' && $('#circleSelect').val() != '<?php echo $_SESSION['circle']; ?>' && !runOnce) {
                                         runOnce = true;
                                         $('#circleSelect').selectpicker('val', '<?php echo $_SESSION['circle']; ?>');
@@ -151,14 +155,14 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         </li>
                         <li class="list-group-item">
                             <input class="form-check-input" type="radio" name="SAPOpt" id="SAPOpt2"
-                                onclick="$('#circleSelect, #citySelect, #sectorSelect').selectpicker('hide'); $('#searchSAPForm').removeClass('d-none'); $('#showImg').addClass('align-self-end').removeClass('align-self-start');" />
+                                onclick="$('#circleSelect, #citySelect, #sectorSelect').selectpicker('hide'); $('#searchSAPForm').removeClass('d-none'); $('#showGrp').addClass('align-self-end').removeClass('align-self-start'); $('.bi-chevron-right').addClass('d-none');" />
                             <label class="stretched-link" for="SAPOpt2"><small>Search SAP/Site ID</small></label>
                         </li>
                     </ul>
                     <ul class="navbar-nav mb-1 mb-lg-0 me-1">
                         <li class="nav-item"></li>
                     </ul>
-                    <select class="dropdown selectpicker show-tick align-self-start me-1" data-width="fit"
+                    <select class="dropdown selectpicker show-tick align-self-start !me-1" data-width="fit"
                         title="Select Circle" data-show-subtext="true" data-live-search="true"
                         data-live-search-placeholder="🔎" data-size="5"
                         data-style="btn-sm btn-outline-primary text-body-emphasis" data-icon-base="bi"
@@ -177,9 +181,9 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                             echo '<option data-subtext="' . $data['CircleCode'] . '" value="' . $data['CircleCode'] . '" ' . $sel . '>' . $data['CircleName'] . '</option>';
                         }
                         ?>
-                    </select>
-                    <?php include ('modules/selectCity.php');
-                    include ('modules/selectSector.php') ?>
+                    </select><i class="bi bi-chevron-right align-self-start mt-1 d-none"></i>
+                    <?php include('modules/selectCity.php');
+                    include('modules/selectSector.php') ?>
                     <ul class="navbar-nav mb-1 mb-lg-0">
                         <li class="nav-item"></li>
                     </ul>
@@ -201,13 +205,22 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                     <ul class="navbar-nav mb-1 mb-lg-0 me-1">
                         <li class="nav-item"></li>
                     </ul>
-                    <button class="btn btn-sm btn-success text-nowrap rounded-pill d-none" id="showImg" disabled>
-                        <div class="spinner-border spinner-border-sm align-self-center me-1 d-none" id="spinner"
-                            role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                        <i class="bi bi-images me-1"></i>Show
-                    </button>
+                    <div class="btn-group btn-group-sm text-nowrap d-none" id="showGrp">
+                        <input type="hidden" name="pathVal2" id="pathVal2" />
+                        <button class="btn btn-success rounded-pill" id="showImg" data-bs-toggle="tooltip"
+                            title="Show Images" disabled>
+                            <div class="spinner-border spinner-border-sm align-self-center me-1 d-none" id="spinner"
+                                role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <i class="bi bi-images me-1"></i> Show
+                        </button>
+                        <!-- <span class="vr"></span> -->
+                        <!-- <button class="btn btn-success rounded-end-pill" id="showInfo" data-bs-toggle="modal"
+                            data-bs-target="#SAPInfoModal" title="Show Site Info" disabled>
+                            <i class="bi bi-info-circle-fill me-1"></i>
+                        </button> -->
+                    </div>
                     <ul class="navbar-nav mb-1 mb-lg-0 ms-1 me-auto">
                         <li class="nav-item"></li>
                     </ul>
@@ -243,24 +256,24 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <form class="!w-auto" id="uploadForm" method="post" action="" enctype="multipart/form-data">
                         <input type="hidden" name="pathVal" id="pathVal" />
-                        <div class="collapse collapse-horizontal" id="uploadCollapse">
+                        <div class="collapse collapse-horizontal me-1" id="uploadCollapse">
                             <fieldset class="input-group input-group-sm" id="uploadGrp" disabled style="width: 25rem;">
                                 <label class="btn btn-outline-primary text-body-emphasis" for="uploadFile">
                                     Select Images</label>
                                 <input class="form-control" type="file" name="uploadFile[]" id="uploadFile"
-                                    accept="image/*" multiple data-bs-toggle="tooltip" title="Select Images" />
+                                    accept="image/*" multiple !data-bs-toggle="tooltip" title="Select Images" />
                                 <button class="btn btn-info" name="uploadBtn" data-bs-toggle="tooltip" title="Upload">
                                     <i class="bi bi-upload"></i></button>
                             </fieldset>
                         </div>
-                        <?php include ('modules/dbUpload.php'); ?>
+                        <?php include('modules/dbUpload.php'); ?>
                     </form>
-                    <ul class="navbar-nav mb-1 mb-lg-0 me-1">
+                    <ul class="navbar-nav mb-1 mb-lg-0 !me-1">
                         <li class="nav-item"></li>
                     </ul>
                     <div class="!btn-group d-flex">
                         <span data-bs-toggle="tooltip" xdata-bs-html="true"
-                            title="Click to Show Image Upload & Management Options.">
+                            title="Show/Hide Image Upload & other Options.">
                             <button class="btn btn-sm btn-outline-primary text-nowrap" id="chkboxToggle"
                                 data-bs-toggle="collapse" data-bs-target="#uploadCollapse"
                                 aria-controls="uploadCollapse">
@@ -284,7 +297,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
     </div>
 
     <div id="imgContainer">
-        <?php include ('modules/imgContainer.php'); ?>
+        <?php include('modules/imgContainer.php'); ?>
     </div>
 
     <!-- <nav class="navbar bg-secondary-subtle border-top border-secondary !justify-content-center"
@@ -302,8 +315,9 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
         </ul> -->
     <p class="alert alert-info p-1 position-fixed bottom-0 start-0 mb-1 ms-1">
         Showing <span id="imgCount">x</span> <span id="imgCntTxt">y</span></p>
-    <button class="btn btn-sm btn-info position-fixed bottom-0 end-0 mb-1 d-none" id="gotoTop" data-bs-toggle="tooltip"
-        title="Back to Top" style="margin-right: 4rem;">
+    <button class="btn btn-info icon-link icon-link-hover position-fixed bottom-0 end-0 mb-1 rounded-pill d-none"
+        id="gotoTop" data-bs-toggle="tooltip" title="Back to Top"
+        style="margin-right: 4rem; --bs-icon-link-transform: translate3d(0, -.5rem, 0);">
         <i class="bi bi-arrow-up"></i></button>
     <!-- </nav> -->
     <script src="JS/script.js"></script>

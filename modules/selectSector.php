@@ -1,4 +1,4 @@
-<?php include_once ('dbConfig.php');
+<?php include_once('dbConfig.php');
 $city = @$_POST['city']; ?>
 
 <select class="dropdown selectpicker show-tick align-self-start" data-width="fit" title="Select SAP ID"

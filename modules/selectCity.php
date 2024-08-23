@@ -1,7 +1,7 @@
-<?php include_once ('dbConfig.php');
+<?php include_once('dbConfig.php');
 $circle = @$_POST['circle']; ?>
 
-<select class="dropdown selectpicker show-tick align-self-start me-1" data-width="fit" title="Select City"
+<select class="dropdown selectpicker show-tick align-self-start !me-1" data-width="fit" title="Select City"
     data-show-subtext="true" data-live-search="true" data-live-search-placeholder="🔎" data-size="10"
     data-style="btn-sm btn-outline-primary text-body-emphasis" data-icon-base="bi" data-tick-icon="bi-check-lg"
     id="citySelect">
@@ -14,8 +14,8 @@ $circle = @$_POST['circle']; ?>
     $result = mysqli_query($db, $query);
 
     while ($data = mysqli_fetch_assoc($result)) {
-        // echo '<option data-subtext="' . $circle . '">' . $data['CityCode'] . '</option>';
-        echo '<option>' . $data['CityCode'] . '</option>';
+        echo '<option data-subtext="' . $data['CityName'] . '">' . $data['CityCode'] . '</option>';
+        // echo '<option>' . $data['CityCode'] . '</option>';
     }
     ?>
-</select>
+</select><i class="bi bi-chevron-right align-self-start mt-1 d-none"></i>

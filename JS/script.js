@@ -40,8 +40,8 @@ $(function () {
 });
 
 $('#SAPSelectionType li').click(function () {
-    $('#uploadGrp, #showImg').attr('disabled', true);
-    $('#showImg').removeClass('d-none');
+    $('#uploadGrp, #showGrp button').attr('disabled', true);
+    $('#showGrp').removeClass('d-none');
     // $('#circleSelect, #citySelect, #sectorSelect').selectpicker('val', '');
     $('#sectorSelect').selectpicker('val', '');
     $('#searchSAP input').val('');
@@ -53,7 +53,7 @@ $('#circleSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
         url: "modules/selectCity.php",
         data: { circle: e.target.value },
         success: function (data) {
-            $('#uploadGrp, #showImg').attr('disabled', true);
+            $('#uploadGrp, #showGrp button').attr('disabled', true);
             $('#citySelect').html(data);
             $('#sectorSelect').html('');
             $('#citySelect, #sectorSelect').selectpicker('refresh');
@@ -66,7 +66,7 @@ $('#citySelect').on('changed.bs.select', function (e, clickedIndex, isSelected, 
         url: "modules/selectSector.php",
         data: { city: e.target.value },
         success: function (data) {
-            $('#uploadGrp, #showImg').attr('disabled', true);
+            $('#uploadGrp, #showGrp button').attr('disabled', true);
             $('#sectorSelect').html(data);
             $('#sectorSelect').selectpicker('refresh');
         }
@@ -79,10 +79,10 @@ $('#sectorSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
         type: "POST",
         url: "index.php",
         success: function (data) {
-            if (e.target.value == "") { $('#uploadGrp, #showImg').attr('disabled', 'true'); }
+            if (e.target.value == "") { $('#uploadGrp, #showGrp button').attr('disabled', 'true'); }
             else {
-                $('#uploadGrp, #showImg').removeAttr('disabled');
-                $('#pathVal, #pathVal1').attr('value', e.target.value);
+                $('#uploadGrp, #showGrp button').removeAttr('disabled');
+                $('#pathVal, #pathVal1, #pathVal2').attr('value', e.target.value);
                 // $('#pathVal, #pathVal1').attr('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
                 // document.getElementById('pathVal').setAttribute('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
                 // $("#imgContainer").load(" #imgContainer>*");
@@ -99,13 +99,13 @@ window.onload = async function () {
         $('#spinner').removeClass('d-none');
         setTimeout(() => {
             $('#spinner').addClass('d-none');
-        }, 500);
+        }, 200);
     });
     var selVal = sessionStorage.getItem('circleSel');
     if (selVal != null) {
         $('#circleSelect').selectpicker('val', selVal);
     }
-    await new Promise(res => setTimeout(res, 500));
+    await new Promise(res => setTimeout(res, 200));
 
     $('#citySelect').on('changed.bs.select', function () {
         var This = $(this);
@@ -114,13 +114,13 @@ window.onload = async function () {
         $('#spinner').removeClass('d-none');
         setTimeout(() => {
             $('#spinner').addClass('d-none');
-        }, 1500);
+        }, 700);
     });
     var selVal = sessionStorage.getItem('citySel');
     if (selVal != null) {
         $('#citySelect').selectpicker('val', selVal);
     }
-    await new Promise(res => setTimeout(res, 1500));
+    await new Promise(res => setTimeout(res, 700));
 
     $('#sectorSelect').on('changed.bs.select', function () {
         var This = $(this);
@@ -157,8 +157,8 @@ $(document).on('click', '#searchRes li', function () {
     var SAPID = $(this).text();
     $('#searchSAP').val(SAPID);
     $('#searchRes').empty().removeClass('show');
-    $('#uploadGrp, #showImg').removeAttr('disabled');
-    $('#pathVal, #pathVal1').attr('value', SAPID);
+    $('#uploadGrp, #showGrp button').removeAttr('disabled');
+    $('#pathVal, #pathVal1, #pathVal2').attr('value', SAPID);
 });
 
 $(function () {
@@ -174,7 +174,7 @@ $(function () {
 });
 
 $('#showImg').click(function () {
-    $('#pathVal, #pathVal1').attr('value', $('#pathVal, #pathVal1').attr('value').substr(2, 2) + '/' + $('#pathVal, #pathVal1').attr('value').substr(5, 4) + '/' + $('#pathVal, #pathVal1').attr('value'));
+    $('#pathVal1').attr('value', $('#pathVal1').attr('value').substr(2, 2) + '/' + $('#pathVal1').attr('value').substr(5, 4) + '/' + $('#pathVal1').attr('value'));
     $('#imgForm').submit();
 });
 
