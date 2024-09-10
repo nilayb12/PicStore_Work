@@ -10,12 +10,12 @@ $circle = @$_POST['circle']; ?>
     <?php
     // $query = "SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS City FROM 5g_data_30k WHERE CircleCode = ('$circle') ORDER BY City ASC";
     // $query = "SELECT * FROM city WHERE CircleCode = ('$circle')";
-    $query = "SELECT * FROM city WHERE CircleID = (SELECT CircleID FROM circle WHERE CircleCode = ('$circle'));";
+    $query = "SELECT * FROM city WHERE CityName IS NOT NULL AND CircleID = (SELECT CircleID FROM circle WHERE CircleCode = ('$circle'));";
     $result = mysqli_query($db, $query);
 
     while ($data = mysqli_fetch_assoc($result)) {
-        echo '<option data-subtext="' . $data['CityName'] . '">' . $data['CityCode'] . '</option>';
-        // echo '<option>' . $data['CityCode'] . '</option>';
+        // echo '<option data-subtext="' . $data['CityName'] . '">' . $data['CityCode'] . '</option>';
+        echo '<option data-subtext="' . $data['CityCode'] . '" value="' . $data['CityCode'] . '">' . $data['CityName'] . '</option>';
     }
     ?>
-</select><i class="bi bi-chevron-right align-self-start mt-1 d-none"></i>
+</select><i class="bi bi-chevron-right align-self-start mx-1 mt-1 d-none"></i>

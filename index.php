@@ -6,36 +6,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     exit;
 }
 $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
-
-// $query = "SELECT * FROM circle";
-// $result = mysqli_query($db, $query);
-
-// while ($data = mysqli_fetch_assoc($result)) {
-//     if (!file_exists($data['CircleCode'])) {
-//         @mkdir('images/' . $data['CircleCode'], 0777, true);
-
-//         $circle = $data["CircleCode"];
-//         $query2 = "SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS City FROM 5g_data_30k WHERE CircleCode = ('$circle')";
-//         $query2 = "SELECT * FROM city WHERE CircleCode = ('$circle')";
-//         $result2 = mysqli_query($db, $query2);
-
-//         while ($data2 = mysqli_fetch_assoc($result2)) {
-//             if (!file_exists($data2['City'])) {
-//                 @mkdir('images/' . $circle . '/' . $data2['City'], 0777, true);
-
-//                 $city = $data2["city"];
-//                 $query3 = "WITH temp AS (SELECT DISTINCT SUBSTRING(SAP_ID, 6, 4) AS City, SAP_ID FROM 5g_data_30k) SELECT DISTINCT SAP_ID FROM temp WHERE City = ('$city')";
-//                 $result3 = mysqli_query($db, $query3);
-
-//                 while ($data3 = mysqli_fetch_assoc($result3)) {
-//                     if (!file_exists($data3['SAP_ID'])) {
-//                         @mkdir('images/' . $circle . '/' . $city . '/' . $data3['SAP_ID'], 0777, true);
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
 ?>
 
 <!DOCTYPE html>
@@ -181,7 +151,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                             echo '<option data-subtext="' . $data['CircleCode'] . '" value="' . $data['CircleCode'] . '" ' . $sel . '>' . $data['CircleName'] . '</option>';
                         }
                         ?>
-                    </select><i class="bi bi-chevron-right align-self-start mt-1 d-none"></i>
+                    </select><i class="bi bi-chevron-right align-self-start mx-1 mt-1 d-none"></i>
                     <?php include('modules/selectCity.php');
                     include('modules/selectSector.php') ?>
                     <ul class="navbar-nav mb-1 mb-lg-0">
@@ -192,8 +162,6 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                             <!-- <code class="input-group-text">I-</code> -->
                             <input class="form-control" id="searchSAP" type="search" minlength="6"
                                 placeholder="I-Circle-City-Sector" aria-label="Search" />
-                            <!-- <label class="input-group-text" data-bs-toggle="!tooltip" title="Search SAP/Site ID">
-                                <i class="bi bi-search"></i></label> -->
                             <label class="input-group-text" data-bs-toggle="tooltip"
                                 title="Click on a Search Result to Show Images.">
                                 <i class="bi bi-info-circle"></i></label>
@@ -202,11 +170,10 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                         </ul>
                         <!-- <!?php include ('modules/dbSearchSAP.php'); ?> -->
                     </form>
-                    <ul class="navbar-nav mb-1 mb-lg-0 me-1">
+                    <ul class="navbar-nav mb-1 mb-lg-0 me-2">
                         <li class="nav-item"></li>
                     </ul>
                     <div class="btn-group btn-group-sm text-nowrap d-none" id="showGrp">
-                        <input type="hidden" name="pathVal2" id="pathVal2" />
                         <button class="btn btn-success rounded-pill" id="showImg" data-bs-toggle="tooltip"
                             title="Show Images" disabled>
                             <div class="spinner-border spinner-border-sm align-self-center me-1 d-none" id="spinner"
@@ -246,7 +213,6 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                                 </g>
                             </svg>
                         </label>
-                        <!-- <button class="btn btn-outline-info" title="Search" disabled><i class="bi bi-search"></i></button> -->
                     </form>
                 </div>
             </div>
@@ -300,26 +266,12 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
         <?php include('modules/imgContainer.php'); ?>
     </div>
 
-    <!-- <nav class="navbar bg-secondary-subtle border-top border-secondary !justify-content-center"
-        aria-label="Page Navigation" comment="z-index: 1001;">
-        <ul class="pagination">
-            <li class="page-item" title="First"><a class="page-link" href="#"><i class="bi bi-chevron-bar-left"></i></a>
-            </li>
-            <li class="page-item" title="Previous"><a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">x</a></li>
-            <li class="page-item" title="Next"><a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>
-            </li>
-            <li class="page-item" title="Last"><a class="page-link" href="#"><i class="bi bi-chevron-bar-right"></i></a>
-            </li>
-        </ul> -->
     <p class="alert alert-info p-1 position-fixed bottom-0 start-0 mb-1 ms-1">
         Showing <span id="imgCount">x</span> <span id="imgCntTxt">y</span></p>
     <button class="btn btn-info icon-link icon-link-hover position-fixed bottom-0 end-0 mb-1 rounded-pill d-none"
         id="gotoTop" data-bs-toggle="tooltip" title="Back to Top"
         style="margin-right: 4rem; --bs-icon-link-transform: translate3d(0, -.5rem, 0);">
         <i class="bi bi-arrow-up"></i></button>
-    <!-- </nav> -->
     <script src="JS/script.js"></script>
 </body>
 

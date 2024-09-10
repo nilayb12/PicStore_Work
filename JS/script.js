@@ -82,7 +82,7 @@ $('#sectorSelect').on('changed.bs.select', function (e, clickedIndex, isSelected
             if (e.target.value == "") { $('#uploadGrp, #showGrp button').attr('disabled', 'true'); }
             else {
                 $('#uploadGrp, #showGrp button').removeAttr('disabled');
-                $('#pathVal, #pathVal1, #pathVal2').attr('value', e.target.value);
+                $('#pathVal, #pathVal1').attr('value', e.target.value);
                 // $('#pathVal, #pathVal1').attr('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
                 // document.getElementById('pathVal').setAttribute('value', $('#circleSelect').val() + '/' + $('#citySelect').val() + '/' + e.target.value);
                 // $("#imgContainer").load(" #imgContainer>*");
@@ -158,7 +158,7 @@ $(document).on('click', '#searchRes li', function () {
     $('#searchSAP').val(SAPID);
     $('#searchRes').empty().removeClass('show');
     $('#uploadGrp, #showGrp button').removeAttr('disabled');
-    $('#pathVal, #pathVal1, #pathVal2').attr('value', SAPID);
+    $('#pathVal, #pathVal1').attr('value', SAPID);
 });
 
 $(function () {
