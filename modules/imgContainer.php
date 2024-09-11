@@ -1,16 +1,18 @@
-<?php include_once ('dbConfig.php'); ?>
+<?php include_once('dbConfig.php'); ?>
 
 <form id="imgForm" method="post" action="">
     <button class="btn d-none" name="deleteBtn" id="deleteBtn"></button>
     <input type="hidden" name="pathVal1" id="pathVal1" />
-    <?php include ('dbDeleteSelected.php');
-    $path = @$_POST['pathVal1'];
+    <?php include('dbDeleteSelected.php');
+    // $path = @$_POST['pathVal1'];
+    $path = substr(@$_POST['pathVal1'], 2, 2) . '/' . substr(@$_POST['pathVal1'], 5, 4) . '/' . substr(@$_POST['pathVal1'], 0);
     $query = "SELECT * FROM image WHERE FilePath = ('$path')";
     $result = mysqli_query($db, $query);
 
     if (mysqli_num_rows($result) == 0) {
         echo '<div class="text-center">';
-        if (empty($path)) { ?>
+        // if (empty($path)) {
+        if (strlen($path) - 2 == 0) { ?>
             <svg class="my-3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="8rem" height="8rem">
                 <circle cx="12" cy="12" r="12" fill="#0a2885"></circle>
                 <path
@@ -107,9 +109,9 @@
             </div> -->
             </figure>
         <?php }
-        echo '<script type="text/javascript">
-            $("#SAPSelection").html(`' . substr($path, 8) . ' <i class="bi bi-caret-down-fill"></i>' . '`);
-        </script>';
+        // echo '<script type="text/javascript">
+        //     $("#SAPSelection").html(`' . substr($path, 8) . ' <i class="bi bi-caret-down-fill"></i>' . '`);
+        // </script>';
     }
     ?>
 </form>

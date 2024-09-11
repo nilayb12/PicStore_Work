@@ -57,7 +57,7 @@ $isAdmin = $_SESSION['isAdmin'] == 0 ? 'd-none' : '';
                 </button>
                 <ul class="navbar-nav flex-row mb-1 mb-lg-0 me-auto">
                     <li class="nav-item me-sm-3 me-md-2">
-                        <a class="nav-link" href="">Home</a>
+                        <a class="nav-link" href=""><i class="bi bi-house-fill"></i> Home</a>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" data-bs-toggle="modal" data-bs-target="#aboutModal">About</button>

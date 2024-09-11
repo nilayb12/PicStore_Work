@@ -174,7 +174,7 @@ $(function () {
 });
 
 $('#showImg').click(function () {
-    $('#pathVal1').attr('value', $('#pathVal1').attr('value').substr(2, 2) + '/' + $('#pathVal1').attr('value').substr(5, 4) + '/' + $('#pathVal1').attr('value'));
+    // $('#pathVal1').attr('value', $('#pathVal1').attr('value').substr(2, 2) + '/' + $('#pathVal1').attr('value').substr(5, 4) + '/' + $('#pathVal1').attr('value'));
     $('#imgForm').submit();
 });
 
