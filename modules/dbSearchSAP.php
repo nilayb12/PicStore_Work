@@ -1,5 +1,5 @@
 <?php session_start();
-include_once ('dbConfig.php');
+include_once('dbConfig.php');
 
 if (isset($_REQUEST['term'])) {
     $sql = "SELECT DISTINCT SAP_ID FROM 5g_data WHERE SAP_ID LIKE ?";
